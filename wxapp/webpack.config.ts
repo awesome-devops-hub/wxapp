@@ -4,6 +4,7 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 import * as webpack from 'webpack';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import TerserPlugin = require('terser-webpack-plugin');
+import OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 import MiniCssExtractPlugin = require('mini-css-extract-plugin');
 import * as path from 'path';
 import { pickBy, identity } from 'lodash';
@@ -173,6 +174,9 @@ export default (env: string) => {
                 !isDev && new TerserPlugin({
                     test: /\.js(\?.*)?$/i,
                     extractComments: false
+                }),
+                !isDev && new OptimizeCSSAssetsPlugin({
+                    assetNameRegExp: /\.(css|wxss)$/g
                 })
             ].filter(Boolean),
             splitChunks: {

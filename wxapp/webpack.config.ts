@@ -6,11 +6,13 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import TerserPlugin = require('terser-webpack-plugin');
 import OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 import MiniCssExtractPlugin = require('mini-css-extract-plugin');
-import * as path from 'path';
-import { pickBy, identity } from 'lodash';
+import { resolve, relative, parse, join, dirname } from 'path';
+import { pickBy, identity, startsWith, find } from 'lodash';
 import { Environment } from './env/env';
+import { existsSync } from 'fs';
 
-const srcDir = path.resolve('src');
+const srcDir = resolve('src');
+const distDir = resolve('dist');
 
 const loadEnv = (env: string): Environment => {
     const { environment } = require(`./env/${env}.env.ts`);
@@ -32,28 +34,78 @@ const fileLoader = (ext = '[ext]', esModule = false) => {
 const getEntries = (root: string, patterns: string[]) => {
     let fileList = globby.sync(patterns)
     return fileList.reduce((value, current) => {
-        let filePath = path.parse(path.relative(root, current));
-        let entry = path.join(filePath.dir, filePath.name);
+        let filePath = parse(relative(root, current));
+        let entry = join(filePath.dir, filePath.name);
         value[entry] || (value[entry] = []);
-        value[entry].push(path.resolve(__dirname, current));
+        value[entry].push(resolve(__dirname, current));
         return value;
     }, {});
+}
+
+const getEntryComponents = (entry: string, components: string[]) => {
+    const file = resolve(srcDir, entry + '.json');
+    const data = existsSync(file) ? require(file) : {};
+    if (data.usingComponents) {
+        Object.values(data.usingComponents).forEach((e: any) => {
+            let nextEntry: string;
+            if (startsWith(e, '/components')) {
+                nextEntry = relative(srcDir, resolve(srcDir, '.' + e));
+            } else {
+                nextEntry = relative(srcDir, resolve(dirname(file), e));
+            }
+            if (!find(components, e => e === nextEntry)) {
+                components.push(nextEntry);
+                getEntryComponents(nextEntry, components);
+            }
+        });
+    }
+}
+
+const getComponents = (entries: string[]): string[] => {
+    const components: string[] = [];
+    entries.forEach(entry => getEntryComponents(entry, components));
+    return components;
+}
+
+const getPages = () => {
+    const app = require(resolve(srcDir, 'app.json'));
+    const { pages = [], subPackages = [] } = app;
+    for (const subPackage of subPackages) {
+        const pageRoot = subPackage.root;
+        for (let page of subPackage.pages) {
+            page = pageRoot + page;
+            pages.push(page);
+        }
+    }
+    return pages;
+}
+
+const toEntryPoints = (entries: string[]) => {
+    const obj = {};
+    entries.forEach(entry => obj[entry] = globby.sync(resolve(srcDir, entry) + '\.*'));
+    return obj;
 }
 
 export default (env: string) => {
     const isDev = env !== 'prod';
     const environment: Environment = loadEnv(env);
+    const pages = getPages();
+    const components = getComponents(pages);
+    const jsonFiles = ['app', ...pages, ...components]
+        .map(e => e + '.json')
+        .filter(e => existsSync(resolve(srcDir, e)));
+
     return {
         entry: pickBy({
             ...getEntries('./src', ['./src/*']),
-            ...getEntries('./src', ['./src/pages/**']),
-            ...getEntries("./src", ['./src/components/**']),
+            ...toEntryPoints(pages),
+            ...toEntryPoints(components),
             mock: environment.localMock ? globby.sync(['./src/mock/**']) : undefined
         }, identity),
         output: {
             filename: '[name].js',
             publicPath: '/',
-            path: path.resolve('dist'),
+            path: resolve('dist'),
             globalObject: 'global'
         },
         module: {
@@ -109,7 +161,7 @@ export default (env: string) => {
                                 implementation: require('sass'),
                                 sassOptions: {
                                     fiber: false,
-                                    includePaths: [path.resolve('src', 'styles'), srcDir]
+                                    includePaths: [resolve('src', 'styles'), srcDir]
                                 }
                             }
                         }
@@ -159,11 +211,11 @@ export default (env: string) => {
             new CopyWebpackPlugin({
                 patterns: [
                     { from: 'assets', to: 'assets', context: srcDir },
-                    {
-                        from: '**/*.json', context: srcDir, transform(content) {
-                            return isDev ? content : JSON.stringify(JSON.parse(content));
-                        }
-                    }
+                    ...jsonFiles.map(e => ({
+                        from: resolve(srcDir, e),
+                        to: resolve(distDir, e),
+                        transform: content => isDev ? content : JSON.stringify(JSON.parse(content))
+                    }))
                 ]
             })
         ],
@@ -187,7 +239,7 @@ export default (env: string) => {
                         chunks: 'all',
                     },
                     scripts: {
-                        test: /[\\/]src[\\/](core|protocol)[\\/]/,
+                        test: /[\\/]src[\\/](core|protocol|components)[\\/].*\.(js|jsx|ts|tsx)$/,
                         name: 'scripts',
                         chunks: 'all',
                         enforce: true,
@@ -198,9 +250,9 @@ export default (env: string) => {
         devtool: isDev ? 'source-map' : false,
         resolve: {
             alias: {
-                '@': path.resolve('src')
+                '@': resolve('src')
             },
-            modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+            modules: [resolve(__dirname, 'src'), 'node_modules'],
             extensions: ['.ts', '.js']
         },
         watchOptions: {

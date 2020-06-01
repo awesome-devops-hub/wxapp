@@ -1,0 +1,31 @@
+syntax = "proto2";
+
+import "WebPbExtend.proto";
+
+option (java_import) = 'lombok.Getter';
+option (java_import) = 'lombok.Setter';
+option (java_import) = 'lombok.experimental.Accessors';
+option (java_import) = 'javax.validation.constraints.NotNull';
+option (java_import) = 'javax.validation.constraints.NotEmpty';
+option (java_import) = 'javax.validation.constraints.Size';
+option (java_import) = 'org.hibernate.validator.constraints.Length';
+option (java_import) = 'org.hibernate.validator.constraints.Range';
+option (java_import) = 'javax.validation.Valid';
+option (java_import) = 'javax.validation.constraints.Pattern';
+option (java_import) = 'com.fasterxml.jackson.annotation.JsonInclude';
+option (java_import) = 'com.fasterxml.jackson.annotation.JsonInclude.Include';
+option (java_import) = 'com.fasterxml.jackson.databind.annotation.JsonSerialize';
+option (java_import) = 'com.fasterxml.jackson.databind.ser.std.ToStringSerializer';
+option (java_import) = 'cool.qun.estate.backend.core.wire.converter.PbEnumConverter';
+
+option (java_common_anno) = '@Getter';
+option (java_common_anno) = '@Setter';
+option (java_common_anno) = '@Accessors(chain = true)';
+
+option (java_getter) = false;
+option (java_setter) = false;
+
+option (ts_long) = false;
+option (ts_json) = false;
+option (ts_stream) = false;
+option (ts_long_as_string) = false;

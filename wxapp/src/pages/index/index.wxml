@@ -1,0 +1,8 @@
+<view className='page'>
+    <view class="center">
+        <vant-button type="primary" class="center">
+            Vant按钮
+        </vant-button>
+        <view>{{message}}</view>
+    </view>
+</view>

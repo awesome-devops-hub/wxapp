@@ -1,0 +1,41 @@
+syntax = "proto2";
+
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.FileOptions {
+    repeated string java_import = 2000;
+
+    repeated string java_common_anno = 2001;
+
+    optional bool java_setter = 2002;
+
+    optional bool java_getter = 2003;
+
+    optional bool ts_long = 2100;
+
+    optional bool ts_json = 2101;
+
+    optional bool ts_stream = 2102;
+
+    optional bool ts_long_as_string = 2103;
+}
+
+extend google.protobuf.MessageOptions {
+    optional bool message_omitted = 1000;
+
+    optional string method = 1001;
+
+    optional string path = 1002;
+
+    repeated string tag = 1003;
+
+    repeated string java_message_anno = 2000;
+}
+
+extend google.protobuf.FieldOptions {
+    optional bool omitted = 1000;
+
+    repeated string java_anno = 2000;
+
+    optional bool ts_string = 3000;
+}

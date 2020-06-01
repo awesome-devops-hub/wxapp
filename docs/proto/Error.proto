@@ -1,0 +1,17 @@
+syntax = "proto2";
+
+package ErrorProto;
+
+option java_package = "cool.qun.estate.backend.protocol.error";
+
+import "WebpbOptions.proto";
+
+enum ErrorCode {
+    OK = 0;
+    ERROR = 1;
+}
+
+message ErrorMessage {
+    required ErrorCode errCode = 1 [(java_anno) = '@JsonSerialize(converter = PbEnumConverter.class)'];
+    optional string message = 2;
+}

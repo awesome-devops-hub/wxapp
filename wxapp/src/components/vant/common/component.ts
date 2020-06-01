@@ -1,6 +1,9 @@
 // @ts-nocheck
 import { basic } from '../mixins/basic';
-import { VantComponentOptions, CombinedComponentInstance } from '../definitions';
+import {
+    VantComponentOptions,
+    CombinedComponentInstance,
+} from 'definitions/index';
 
 const relationFunctions = {
     ancestor: {

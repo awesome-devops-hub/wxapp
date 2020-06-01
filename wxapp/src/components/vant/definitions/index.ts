@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Weapp } from './weapp';
 
 type RecordToAny<T> = { [K in keyof T]: any };

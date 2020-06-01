@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { VantComponent } from '../common/component';
 import { button } from '../mixins/button';
 import { openType } from '../mixins/open-type';

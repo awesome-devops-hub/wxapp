@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { getSystemInfoSync } from './utils';
 
 function compareVersion(v1, v2) {

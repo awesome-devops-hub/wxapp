@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { VantComponent } from '../common/component';
 
 VantComponent({

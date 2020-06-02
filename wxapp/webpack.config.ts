@@ -198,7 +198,7 @@ export default (env: string) => {
                     use: [
                         fileLoader(),
                         {
-                            loader: 'wxml-loader',
+                            loader: resolve(__dirname, 'webpack/wxml-loader/index.js'),
                             options: {
                                 root: srcDir,
                                 enforceRelativePath: true,
@@ -236,7 +236,14 @@ export default (env: string) => {
                     ...wxsList.map(e => ({
                         from: resolve(srcDir, e),
                         to: resolve(distDir, e),
-                        transform: content => isDev ? content : Terser.minify(content.toString()).code
+                        transform: content => isDev ? content.toString() : Terser.minify(content.toString(), {
+                            compress: {
+                                join_vars: false,
+                                conditionals: false,
+                                unsafe: true,
+                                unsafe_undefined: true
+                            }
+                        }).code.replace(/void 0/g, 'undefined')
                     }))
                 ]
             })
@@ -246,7 +253,7 @@ export default (env: string) => {
             minimize: true,
             minimizer: [
                 !isDev && new TerserPlugin({
-                    test: /\.(js(\?.*)?|wxs)$/i,
+                    test: /\.js(\?.*)?$/i,
                     extractComments: false
                 }),
                 !isDev && new OptimizeCSSAssetsPlugin({

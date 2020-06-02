@@ -8,16 +8,11 @@ import OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 import MiniCssExtractPlugin = require('mini-css-extract-plugin');
 import { resolve, relative, parse, join, dirname } from 'path';
 import { pickBy, identity, startsWith, find } from 'lodash';
-import { Environment } from './env/env';
-import { existsSync } from 'fs';
+import { existsSync, readFileSync } from 'fs';
+import Terser from 'terser';
 
 const srcDir = resolve('src');
 const distDir = resolve('dist');
-
-const loadEnv = (env: string): Environment => {
-    const { environment } = require(`./env/${env}.env.ts`);
-    return environment;
-}
 
 const fileLoader = (ext = '[ext]', esModule = false) => {
     return {
@@ -42,26 +37,49 @@ const getEntries = (root: string, patterns: string[]) => {
     }, {});
 }
 
-const getEntryComponents = (entry: string, components: string[]) => {
-    const file = resolve(srcDir, entry + '.json');
-    const data = existsSync(file) ? require(file) : {};
-    if (data.usingComponents) {
-        Object.values(data.usingComponents).forEach((e: any) => {
-            let nextEntry: string;
-            if (startsWith(e, '/components')) {
-                nextEntry = relative(srcDir, resolve(srcDir, '.' + e));
-            } else {
-                nextEntry = relative(srcDir, resolve(dirname(file), e));
+const getWxsList = (entries: string[]): string[] => {
+    const getEntryWxsList = (file: string, wxsList: string[]) => {
+        const ext = file.split('.').pop();
+        const text = readFileSync(file, "utf8");
+        const regex = ext === 'wxml' ? /src[\s=]+['"](.+?\.wxs)['"]/g : /require[\s('"]+(.+?\.wxs)[\s)'"]+/g;
+        do {
+            const match = regex.exec(text);
+            if (!match) {
+                break;
             }
-            if (!find(components, e => e === nextEntry)) {
-                components.push(nextEntry);
-                getEntryComponents(nextEntry, components);
+            const path = resolve(dirname(file), match[1]);
+            if (!find(wxsList, e => e === path)) {
+                wxsList.push(path);
+                getEntryWxsList(path, wxsList);
             }
-        });
+        } while (true);
     }
+
+    const wxsList: string[] = [];
+    entries.forEach(entry => getEntryWxsList(resolve(srcDir, entry + '.wxml'), wxsList));
+    return wxsList.map(e => relative(srcDir, e));
 }
 
 const getComponents = (entries: string[]): string[] => {
+    const getEntryComponents = (entry: string, components: string[]) => {
+        const file = resolve(srcDir, entry + '.json');
+        const data = existsSync(file) ? require(file) : {};
+        if (data.usingComponents) {
+            Object.values(data.usingComponents).forEach((e: any) => {
+                let nextEntry: string;
+                if (startsWith(e, '/components')) {
+                    nextEntry = relative(srcDir, resolve(srcDir, '.' + e));
+                } else {
+                    nextEntry = relative(srcDir, resolve(dirname(file), e));
+                }
+                if (!find(components, e => e === nextEntry)) {
+                    components.push(nextEntry);
+                    getEntryComponents(nextEntry, components);
+                }
+            });
+        }
+    }
+
     const components: string[] = [];
     entries.forEach(entry => getEntryComponents(entry, components));
     return components;
@@ -88,9 +106,10 @@ const toEntryPoints = (entries: string[]) => {
 
 export default (env: string) => {
     const isDev = env !== 'prod';
-    const environment: Environment = loadEnv(env);
+    const { environment } = require(`./env/${env}.env.ts`);
     const pages = getPages();
     const components = getComponents(pages);
+    const wxsList = getWxsList([...pages, ...components]);
     const jsonFiles = ['app', ...pages, ...components]
         .map(e => e + '.json')
         .filter(e => existsSync(resolve(srcDir, e)));
@@ -135,9 +154,7 @@ export default (env: string) => {
                     include: /src/,
                     exclude: /node_modules/,
                     use: [
-                        fileLoader(),
-                        'babel-loader',
-                        'eslint-loader'
+                        fileLoader()
                     ]
                 },
                 {
@@ -179,7 +196,7 @@ export default (env: string) => {
                     test: /\.wxml$/,
                     include: /src/,
                     use: [
-                        fileLoader('wxml'),
+                        fileLoader(),
                         {
                             loader: 'wxml-loader',
                             options: {
@@ -215,6 +232,11 @@ export default (env: string) => {
                         from: resolve(srcDir, e),
                         to: resolve(distDir, e),
                         transform: content => isDev ? content : JSON.stringify(JSON.parse(content))
+                    })),
+                    ...wxsList.map(e => ({
+                        from: resolve(srcDir, e),
+                        to: resolve(distDir, e),
+                        transform: content => isDev ? content : Terser.minify(content.toString()).code
                     }))
                 ]
             })
@@ -224,7 +246,7 @@ export default (env: string) => {
             minimize: true,
             minimizer: [
                 !isDev && new TerserPlugin({
-                    test: /\.js(\?.*)?$/i,
+                    test: /\.(js(\?.*)?|wxs)$/i,
                     extractComments: false
                 }),
                 !isDev && new OptimizeCSSAssetsPlugin({

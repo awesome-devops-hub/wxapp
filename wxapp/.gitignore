@@ -3,3 +3,4 @@ dist
 .idea
 *.iml
 package-lock.json
+src/functional_test/test_reports/

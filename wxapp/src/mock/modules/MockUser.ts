@@ -1,18 +1,22 @@
-import { MockData } from '../Mock';
 import {
     HelloRequest,
     HelloResponse,
     UserMpLoginRequest,
     UserMpLoginResponse
 } from '../../protocol/UserProto';
+import { MockData } from '../Mock';
+import { nextRange } from '../Utils';
 
-const USER_ID = 100001;
+export const mockDataUser = {
+    userId: nextRange(10000, 100000)
+};
+
 export const mockUser: MockData[] = [
     {
         request: UserMpLoginRequest,
-        response: () => UserMpLoginResponse.create({
-            id: USER_ID + '',
-            token: 'TOKEN-' + USER_ID
+        response: (res: UserMpLoginRequest) => UserMpLoginResponse.create({
+            id: mockDataUser.userId + '',
+            token: 'TOKEN-' + res.appId + '-' + mockDataUser.userId
         })
     },
     {

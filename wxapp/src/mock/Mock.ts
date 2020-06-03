@@ -1,13 +1,13 @@
 import RequestOption = WechatMiniprogram.RequestOption;
 import RequestTask = WechatMiniprogram.RequestTask;
 import { WebpbMessage } from 'webpb';
-import { mockUser } from './modules/MockUser';
 import find from 'lodash/find';
 import { httpService } from '../core/service/HttpService';
+import { mockUser } from './modules/MockUser';
 
 export interface MockData {
     request: { prototype: WebpbMessage },
-    response: () => any
+    response: (request: any) => any
 }
 
 const mockList: MockData[] = [
@@ -23,7 +23,7 @@ httpService.wxRequest = (option: RequestOption): RequestTask => {
     if (option.success) {
         const response = {
             statusCode: 200,
-            data: data.response()
+            data: data.response(message)
         } as any;
         console.log(['response', response.data]);
         option.success(response);

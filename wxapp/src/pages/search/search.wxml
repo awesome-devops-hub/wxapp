@@ -1,6 +1,6 @@
 <view>
     <view>
-        <van-search input-class="search-box" value="{{ searchValue }}" placeholder="请输入搜索关键词" bind:search="onChange" />
+        <van-search focus="{{true}}" input-class="search-box" value="{{ searchValue }}" placeholder="请输入搜索关键词" bind:search="onChange" />
     </view>
     <van-panel title="热门搜索">
         <view>

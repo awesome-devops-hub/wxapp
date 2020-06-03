@@ -4,15 +4,14 @@ import { WebpbMessage } from 'webpb';
 import find from 'lodash/find';
 import { httpService } from '../core/service/HttpService';
 import { mockUser } from './modules/MockUser';
+import { mockSearch } from "./modules/MockSearch";
 
 export interface MockData {
     request: { prototype: WebpbMessage },
     response: (request: any) => any
 }
 
-const mockList: MockData[] = [
-    ...mockUser
-];
+const mockList: MockData[] = [...mockUser, ...mockSearch];
 
 httpService.wxRequest = (option: RequestOption): RequestTask => {
     const message: WebpbMessage = option['__message'];

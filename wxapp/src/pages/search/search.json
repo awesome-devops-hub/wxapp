@@ -1,0 +1,11 @@
+{
+    "enablePullDownRefresh": false,
+    "usingComponents": {
+        "vant-field": "/components/vant/field/index",
+        "cell-group": "/components/vant/cell-group/index",
+        "van-tag": "/components/vant/tag/index",
+        "van-panel": "/components/vant/panel/index",
+        "van-search": "/components/vant/search/index"
+    },
+    "navigationBarTitleText": "搜索"
+}

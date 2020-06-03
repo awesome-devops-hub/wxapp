@@ -1,0 +1,27 @@
+.bordered-input {
+    margin: 1rem;
+    border: 1px solid #ebedf0;
+    border-radius: 5px;
+}
+
+.search-box {
+    border-radius: 5px;
+}
+
+.search-tag {
+    padding: .5rem 1rem;
+    display: flex;
+    justify-items: center;
+    flex-wrap: wrap;
+
+    .tag-item {
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+        display: inline-flex;
+        align-items: center;
+        font-size: 12px;
+        padding: 3px 6px 3px 6px;
+        color: #FFF;
+        background-color: #969799;
+    }
+}

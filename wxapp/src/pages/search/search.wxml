@@ -1,0 +1,27 @@
+<view>
+    <view>
+        <van-search input-class="search-box" value="{{ searchValue }}" placeholder="请输入搜索关键词" bind:search="onChange" />
+    </view>
+    <van-panel title="热门搜索">
+        <view>
+            <div class="search-tag">
+                <block wx:for="{{hotSearch}}" wx:for-index="idx" wx:for-item="item">
+                    <view class="tag-item" id="tag{{idx}}" data-hi="{{item}}" bindtap="searchTag">
+                        {{item}}
+                    </view>
+                </block>
+            </div>
+        </view>
+    </van-panel>
+    <van-panel title="搜索历史">
+        <view>
+            <div class="search-tag">
+                <block wx:for="{{searchHistory}}" wx:for-index="idx" wx:for-item="item">
+                    <view class="tag-item" id="tag{{idx}}" data-hi="{{item}}" bindtap="searchTag">
+                        {{item}}
+                    </view>
+                </block>
+            </div>
+        </view>
+    </van-panel>
+</view>

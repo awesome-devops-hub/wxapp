@@ -1,0 +1,40 @@
+syntax = "proto2";
+
+package SearchProto;
+
+option java_package = "cool.qun.estate.backend.protocol.search";
+
+import "Resource.proto";
+import "WebpbOptions.proto";
+
+message SearchHistoryPb {
+    repeated string entries = 1;
+}
+
+message HotSearchPb{
+    repeated string entries = 1;
+}
+
+message HotSearchResponse {
+    required ResourceProto.PagingPb paging = 1;
+    required HotSearchPb  entries= 2;
+}
+
+message SearchHistoryResponse {
+    required ResourceProto.PagingPb paging = 1;
+    required SearchHistoryPb  entries= 2;
+}
+
+message HotSearchRequest {
+    option (method) = 'GET';
+    option (path) = '/api/search/hot?page={pageable.page}&size={pageable.size}';
+    required ResourceProto.PageablePb pageable = 1 [(omitted) = true];
+}
+
+message SearchHistoryRequest {
+    option (method) = 'GET';
+    option (path) = '/api/search/history?page={pageable.page}&size={pageable.size}';
+    required ResourceProto.PageablePb pageable = 1 [(omitted) = true];
+
+}
+

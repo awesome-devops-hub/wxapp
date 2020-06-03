@@ -26,17 +26,11 @@ class SearchPage extends WxPage<State> {
     // wx.hideHomeButton();
     this.getHotSearchTags().subscribe((res) =>
       {
-        console.log(res.entries.entries);
-          
         this.setData({ hotSearch: res.entries.entries });}
     );
     this.getHotSearchTags().subscribe((res) =>
       this.setData({ searchHistory: res.entries.entries })
     );
-  }
-
-  onPullDownRefresh() {
-
   }
 
   onChange(event) {

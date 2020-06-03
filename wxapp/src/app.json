@@ -1,5 +1,10 @@
 {
-    "pages": ["pages/index/index", "pages/search/search"],
+    "pages": [
+        "pages/index/index",
+        "pages/search/search",
+        "pages/policy/policy",
+        "pages/message/message"
+    ],
     "window": {
         "backgroundTextStyle": "dark",
         "navigationBarBackgroundColor": "#13a06f",
@@ -11,15 +16,18 @@
         "list": [
             {
                 "pagePath": "pages/index/index",
-                "iconPath": "./assets/tab-bar/home.png",
-                "selectedIconPath": "./assets/tab-bar/home-active.png",
-                "text": "首页"
+                "iconPath": "./assets/tab-bar/homepage-light.png",
+                "selectedIconPath": "./assets/tab-bar/homepage.png"
             },
             {
-                "pagePath": "pages/index/index",
-                "iconPath": "./assets/tab-bar/user.png",
-                "selectedIconPath": "./assets/tab-bar/user-active.png",
-                "text": "我的"
+                "pagePath": "pages/policy/policy",
+                "iconPath": "./assets/tab-bar/policy-light.png",
+                "selectedIconPath": "./assets/tab-bar/policy.png"
+            },
+            {
+                "pagePath": "pages/message/message",
+                "iconPath": "./assets/tab-bar/message-light.png",
+                "selectedIconPath": "./assets/tab-bar/message.png"
             }
         ]
     }

@@ -1,6 +1,5 @@
 import * as globby from 'fast-glob';
 
-import CopyWebpackPlugin from 'copy-webpack-plugin';
 import * as webpack from 'webpack';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import TerserPlugin = require('terser-webpack-plugin');
@@ -183,8 +182,7 @@ export default (env: string) => {
                 },
                 {
                     test: /\.(png|jpg|gif$)$/,
-                    include: /src/,
-                    type: 'javascript/auto',
+                    include: /assets/,
                     use: [
                         fileLoader()
                     ]
@@ -221,11 +219,6 @@ export default (env: string) => {
                     `require('./scripts');` +
                     `} catch (e) {}`,
                 include: 'app.js',
-            }),
-            new CopyWebpackPlugin({
-                patterns: [
-                    { from: 'assets', to: 'assets', context: srcDir }
-                ]
             })
         ],
         optimization: {

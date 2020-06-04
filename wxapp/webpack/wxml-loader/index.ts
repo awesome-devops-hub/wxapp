@@ -92,6 +92,9 @@ export default function loader(this: webpack.loader.LoaderContext, source: strin
 
     const replaceRequest = async ({ request, startIndex, endIndex }) => {
         const module = await loadModule(request);
+        if (!module) {
+            return;
+        }
         let source = extract(module, publicPath);
         const isSourceAbsolute = isAbsolute(source);
         if (!isSourceAbsolute && !/^(\w+:)?\/\//.test(source)) {

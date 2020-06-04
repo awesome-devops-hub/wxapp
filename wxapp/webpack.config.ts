@@ -205,7 +205,9 @@ export default (env: string) => {
             ]
         },
         plugins: [
-            new CleanWebpackPlugin(),
+            new CleanWebpackPlugin({
+                cleanStaleWebpackAssets: false
+            }),
             new MiniCssExtractPlugin({ filename: `[name].wxss` }),
             new webpack.DefinePlugin({
                 'process.env': JSON.stringify(environment)

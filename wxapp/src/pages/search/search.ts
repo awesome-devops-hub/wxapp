@@ -28,7 +28,7 @@ class SearchPage extends WxPage<State> {
       {
         this.setData({ hotSearch: res.entries.entries });}
     );
-    this.getHotSearchTags().subscribe((res) =>
+    this.getSearchHistoryTags().subscribe((res) =>
       this.setData({ searchHistory: res.entries.entries })
     );
   }

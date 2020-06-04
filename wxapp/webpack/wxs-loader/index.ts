@@ -14,6 +14,7 @@ export default function loader(this: webpack.loader.LoaderContext, source: strin
             break;
         }
         const request = urlToRequest(match[1]);
+        this.addDependency(request);
         this.loadModule(request, err => {
             if (err) {
                 throw err;

@@ -8,11 +8,9 @@ import OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 import MiniCssExtractPlugin = require('mini-css-extract-plugin');
 import { resolve, relative, parse, join, dirname } from 'path';
 import { pickBy, identity, startsWith, find } from 'lodash';
-import { existsSync, readFileSync } from 'fs';
-import Terser from 'terser';
+import { existsSync } from 'fs';
 
 const srcDir = resolve('src');
-const distDir = resolve('dist');
 
 const fileLoader = (ext = '[ext]', esModule = false) => {
     return {
@@ -26,6 +24,17 @@ const fileLoader = (ext = '[ext]', esModule = false) => {
     }
 }
 
+const dumpLoader = (output?: string) => {
+    return {
+        loader: resolve(__dirname, 'webpack/dump-loader/index.ts'),
+        options: {
+            name: `[path][name].[ext]`,
+            context: srcDir,
+            output: output
+        }
+    }
+}
+
 const getEntries = (root: string, patterns: string[]) => {
     let fileList = globby.sync(patterns)
     return fileList.reduce((value, current) => {
@@ -35,29 +44,6 @@ const getEntries = (root: string, patterns: string[]) => {
         value[entry].push(resolve(__dirname, current));
         return value;
     }, {});
-}
-
-const getWxsList = (entries: string[]): string[] => {
-    const getEntryWxsList = (file: string, wxsList: string[]) => {
-        const ext = file.split('.').pop();
-        const text = readFileSync(file, "utf8");
-        const regex = ext === 'wxml' ? /src[\s=]+['"](.+?\.wxs)['"]/g : /require[\s('"]+(.+?\.wxs)[\s)'"]+/g;
-        do {
-            const match = regex.exec(text);
-            if (!match) {
-                break;
-            }
-            const path = resolve(dirname(file), match[1]);
-            if (!find(wxsList, e => e === path)) {
-                wxsList.push(path);
-                getEntryWxsList(path, wxsList);
-            }
-        } while (true);
-    }
-
-    const wxsList: string[] = [];
-    entries.forEach(entry => getEntryWxsList(resolve(srcDir, entry + '.wxml'), wxsList));
-    return wxsList.map(e => relative(srcDir, e));
 }
 
 const getComponents = (entries: string[]): string[] => {
@@ -109,10 +95,6 @@ export default (env: string) => {
     const { environment } = require(`./env/${env}.env.ts`);
     const pages = getPages();
     const components = getComponents(pages);
-    const wxsList = getWxsList([...pages, ...components]);
-    const jsonFiles = ['app', ...pages, ...components]
-        .map(e => e + '.json')
-        .filter(e => existsSync(resolve(srcDir, e)));
 
     return {
         entry: pickBy({
@@ -154,11 +136,26 @@ export default (env: string) => {
                     include: /src/,
                     exclude: /node_modules/,
                     use: [
-                        fileLoader()
+                        fileLoader(),
+                        {
+                            loader: resolve(__dirname, 'webpack/wxs-loader/index.ts'),
+                            options: { minify: !isDev }
+                        }
                     ]
                 },
                 {
-                    test: /\.(less)$/,
+                    test: /\.json$/,
+                    include: /src/,
+                    use: [
+                        dumpLoader(),
+                        {
+                            loader: resolve(__dirname, 'webpack/wxjson-loader/index.ts'),
+                            options: { minify: !isDev }
+                        }
+                    ]
+                },
+                {
+                    test: /\.less$/,
                     include: /src/,
                     use: [
                         MiniCssExtractPlugin.loader,
@@ -167,7 +164,7 @@ export default (env: string) => {
                     ]
                 },
                 {
-                    test: /\.(scss)$/,
+                    test: /\.scss$/,
                     include: /src/,
                     use: [
                         MiniCssExtractPlugin.loader,
@@ -198,7 +195,7 @@ export default (env: string) => {
                     use: [
                         fileLoader(),
                         {
-                            loader: resolve(__dirname, 'webpack/wxml-loader/index.js'),
+                            loader: resolve(__dirname, 'webpack/wxml-loader/index.ts'),
                             options: {
                                 root: srcDir,
                                 enforceRelativePath: true,
@@ -227,24 +224,7 @@ export default (env: string) => {
             }),
             new CopyWebpackPlugin({
                 patterns: [
-                    { from: 'assets', to: 'assets', context: srcDir },
-                    ...jsonFiles.map(e => ({
-                        from: resolve(srcDir, e),
-                        to: resolve(distDir, e),
-                        transform: content => isDev ? content : JSON.stringify(JSON.parse(content))
-                    })),
-                    ...wxsList.map(e => ({
-                        from: resolve(srcDir, e),
-                        to: resolve(distDir, e),
-                        transform: content => isDev ? content.toString() : Terser.minify(content.toString(), {
-                            compress: {
-                                join_vars: false,
-                                conditionals: false,
-                                unsafe: true,
-                                unsafe_undefined: true
-                            }
-                        }).code.replace(/void 0/g, 'undefined')
-                    }))
+                    { from: 'assets', to: 'assets', context: srcDir }
                 ]
             })
         ],
@@ -272,7 +252,7 @@ export default (env: string) => {
                         name: 'scripts',
                         chunks: 'all',
                         enforce: true,
-                    },
+                    }
                 }
             }
         },

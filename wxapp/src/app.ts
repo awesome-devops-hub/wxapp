@@ -5,8 +5,5 @@ export const environment: Environment = process.env;
 
 App({
     onLaunch(_options: WechatMiniprogram.App.LaunchShowOption) {
-        if (environment.localMock) {
-
-        }
     }
 });

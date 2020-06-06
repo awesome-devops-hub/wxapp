@@ -1,11 +1,14 @@
 <view className='page'>
     <view class="center">
-        <vant-button type="primary" class="center">Vant按钮</vant-button>
+        <van-button type="primary" class="center">Vant按钮</van-button>
         <view>{{message}}</view>
         <view class="btn-area">
             <navigator url="/pages/search/search" open-type="navigate" hover-class="navigator-hover">
                 跳转到 Search 页面
             </navigator>
+        </view>
+        <view class="btn-area" bindtap="openWebview">
+            跳转到 Webview 页面
         </view>
     </view>
 </view>

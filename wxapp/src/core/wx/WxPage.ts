@@ -8,5 +8,7 @@ export interface WxPage<TData> extends Data<TData>, ILifetime, InstancePropertie
 
 export class WxPage<TData> {
 
+    static pageParams = {};
+
     readonly data: Readonly<TData> = {} as TData;
 }

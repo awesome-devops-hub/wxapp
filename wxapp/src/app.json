@@ -3,7 +3,8 @@
         "pages/index/index",
         "pages/search/search",
         "pages/policy/policy",
-        "pages/message/message"
+        "pages/message/message",
+        "pages/webview/webview"
     ],
     "window": {
         "backgroundTextStyle": "dark",

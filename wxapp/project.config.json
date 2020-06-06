@@ -29,7 +29,7 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"simulatorType": "wechat",
@@ -61,6 +61,13 @@
 					"id": 0,
 					"name": "search",
 					"pathName": "pages/search/search",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 1,
+					"name": "pages/webview/webview",
+					"pathName": "pages/webview/webview",
 					"query": "",
 					"scene": null
 				}

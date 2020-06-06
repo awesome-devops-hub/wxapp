@@ -1,5 +1,5 @@
 import { WxPage } from "../../core/wx/WxPage";
-import { flatten } from "../../core/utils/Utils";
+import { pagify } from "../../core/utils/Utils";
 
 interface State {
 }
@@ -26,4 +26,4 @@ class MessagePage extends WxPage<State> {
   }
 }
 
-Page(flatten(new MessagePage()));
+pagify(new MessagePage());

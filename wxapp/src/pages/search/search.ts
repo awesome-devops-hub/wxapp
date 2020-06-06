@@ -1,7 +1,7 @@
 import { Subscribable } from "rxjs";
 import { httpService } from "../../core/service/HttpService";
 import { WxPage } from "../../core/wx/WxPage";
-import { flatten } from "../../core/utils/Utils";
+import { pagify } from "../../core/utils/Utils";
 import {
   HotSearchRequest,
   HotSearchResponse,
@@ -64,4 +64,4 @@ class SearchPage extends WxPage<State> {
   }
 }
 
-Page(flatten(new SearchPage()));
+pagify(new SearchPage());

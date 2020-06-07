@@ -70,6 +70,7 @@ export class EntryResolver {
             ...this.getEntries(this.srcDir, [this.srcDir + '/*']),
             ...this.getEntryPoints(pages),
             ...this.getEntryPoints(components),
+            styles: './src/styles/index.scss',
             mock: environment.localMock ? globby.sync([this.srcDir + '/mock/**']) : undefined
         }, identity);
     }

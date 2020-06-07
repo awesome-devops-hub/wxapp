@@ -4,7 +4,7 @@ import * as webpack from 'webpack';
 import * as Terser from 'terser';
 
 export default function loader(this: webpack.loader.LoaderContext, source: string | Buffer, sourceMap?: RawSourceMap): string | Buffer | void | undefined {
-    const options = getOptions(this);
+    const options = getOptions(this) || {};
     let text = source.toString();
 
     const loadModule = (request) => {

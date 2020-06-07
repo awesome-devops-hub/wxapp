@@ -3,6 +3,9 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import TerserPlugin = require('terser-webpack-plugin');
 import OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 import MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import * as path from 'path';
+
+const WrapperPlugin = require('wrapper-webpack-plugin');
 import { resolve, } from 'path';
 import { EntryResolver } from './webpack/Webpack';
 
@@ -113,6 +116,9 @@ export default (env: string) => {
                                     includePaths: [resolve('src', 'styles'), srcDir]
                                 }
                             }
+                        },
+                        {
+                            loader: resolve(__dirname, 'webpack/wxss-loader/index.ts')
                         }
                     ]
                 },
@@ -155,6 +161,13 @@ export default (env: string) => {
                     `require('./scripts');` +
                     `} catch (e) {}`,
                 include: 'app.js',
+            }),
+            new WrapperPlugin({
+                header: filename => {
+                    const style = path.relative(path.dirname(path.resolve('/', filename)), '/styles.wxss');
+                    return `@import '${style}';`;
+                },
+                test: /pages[\\/].*\.wxss$/
             })
         ],
         optimization: {

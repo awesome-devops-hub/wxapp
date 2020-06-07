@@ -11,4 +11,6 @@
             跳转到 Webview 页面
         </view>
     </view>
+    <van-icon name="chat-o" />
+    <text class="far fa-user"/>
 </view>

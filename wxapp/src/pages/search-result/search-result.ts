@@ -77,6 +77,7 @@ class SearchResultPage extends WxPage<State> {
       module: this.data.dataResult[this.data.activeTab].module,
       key: this.data.searchValue,
     }).subscribe((res) => {
+      wx.hideToast();
       let originalData = this.data.dataResult;
       if (res.data[0].entries.length > 0) {
         let merged = originalData[this.data.activeTab].entries.concat(

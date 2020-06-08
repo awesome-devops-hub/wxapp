@@ -31,7 +31,7 @@ class SearchPage extends WxPage<State> {
     );
   }
 
-  onSearch(event) {
+  onSearch(_event) {
     wx.navigateTo({
       url: "/pages/search-result/search-result?key=" + this.data.searchValue,
     });

@@ -3,6 +3,7 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import TerserPlugin = require('terser-webpack-plugin');
 import OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 import MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 import * as path from 'path';
 
 const WrapperPlugin = require('wrapper-webpack-plugin');
@@ -147,6 +148,7 @@ export default (env: string) => {
             ]
         },
         plugins: [
+            new FixStyleOnlyEntriesPlugin(),
             new CleanWebpackPlugin(),
             new MiniCssExtractPlugin({ filename: `[name].wxss` }),
             new webpack.DefinePlugin({

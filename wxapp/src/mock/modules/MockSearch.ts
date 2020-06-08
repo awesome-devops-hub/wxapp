@@ -130,5 +130,6 @@ export const mockSearch: MockData[] = [
         data: generateSearchResult(),
       });
     },
+    delay: 500
   },
 ];

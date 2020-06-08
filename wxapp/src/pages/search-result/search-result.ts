@@ -41,7 +41,7 @@ class SearchResultPage extends WxPage<State> {
 
   initSearch() {
     this.getSearchResult(searchReqMock).subscribe((res) => {
-      setTimeout(() => this.clearLoading(), 500);
+      this.clearLoading();
       this.setData({
         dataResult: res.data,
       });

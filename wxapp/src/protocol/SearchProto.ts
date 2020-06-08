@@ -49,6 +49,58 @@ export class HotSearchPb implements IHotSearchPb {
     }
 }
 
+export interface IarticlePb {
+    id: string;
+    title: string;
+    category: string;
+}
+
+export class articlePb implements IarticlePb {
+    id!: string;
+    title!: string;
+    category!: string;
+    META: () => Webpb.WebpbMeta;
+
+    private constructor(p?: IarticlePb) {
+        Webpb.assign(p, this, []);
+        this.META = () => (p && {
+            class: 'articlePb',
+            method: '',
+            path: ''
+        }) as Webpb.WebpbMeta;
+    }
+
+    static create(properties: IarticlePb): articlePb {
+        return new articlePb(properties);
+    }
+}
+
+export interface ISearchResultPb {
+    module: string;
+    entries: IarticlePb[];
+    paging: ResourceProto.IPagingPb;
+}
+
+export class SearchResultPb implements ISearchResultPb {
+    module!: string;
+    entries!: IarticlePb[];
+    paging!: ResourceProto.IPagingPb;
+    META: () => Webpb.WebpbMeta;
+
+    private constructor(p?: ISearchResultPb) {
+        Webpb.assign(p, this, []);
+        this.META = () => (p && {
+            class: 'SearchResultPb',
+            method: '',
+            path: ''
+        }) as Webpb.WebpbMeta;
+    }
+
+    static create(properties: ISearchResultPb): SearchResultPb {
+        return new SearchResultPb(properties);
+    }
+}
+
 export interface IHotSearchResponse {
     paging: ResourceProto.IPagingPb;
     entries: IHotSearchPb;
@@ -94,6 +146,28 @@ export class SearchHistoryResponse implements ISearchHistoryResponse {
 
     static create(properties: ISearchHistoryResponse): SearchHistoryResponse {
         return new SearchHistoryResponse(properties);
+    }
+}
+
+export interface ISearchResultResponse {
+    data: ISearchResultPb[];
+}
+
+export class SearchResultResponse implements ISearchResultResponse {
+    data!: ISearchResultPb[];
+    META: () => Webpb.WebpbMeta;
+
+    private constructor(p?: ISearchResultResponse) {
+        Webpb.assign(p, this, []);
+        this.META = () => (p && {
+            class: 'SearchResultResponse',
+            method: '',
+            path: ''
+        }) as Webpb.WebpbMeta;
+    }
+
+    static create(properties: ISearchResultResponse): SearchResultResponse {
+        return new SearchResultResponse(properties);
     }
 }
 
@@ -144,5 +218,36 @@ export class SearchHistoryRequest implements ISearchHistoryRequest, Webpb.WebpbM
 
     static create(properties: ISearchHistoryRequest): SearchHistoryRequest {
         return new SearchHistoryRequest(properties);
+    }
+}
+
+export interface ISearchResultRequest {
+    pageable: ResourceProto.IPageablePb;
+    key: string;
+    module?: string;
+}
+
+export class SearchResultRequest implements ISearchResultRequest, Webpb.WebpbMessage {
+    pageable!: ResourceProto.IPageablePb;
+    key!: string;
+    module?: string;
+    META: () => Webpb.WebpbMeta;
+
+    private constructor(p?: ISearchResultRequest) {
+        Webpb.assign(p, this, []);
+        this.META = () => (p && {
+            class: 'SearchResultRequest',
+            method: 'GET',
+            path: `/api/search/result${Webpb.query({
+                page: Webpb.getter(p, 'pageable.page'),
+                size: Webpb.getter(p, 'pageable.size'),
+                key: p.key,
+                module: p.module,
+            })}`
+        }) as Webpb.WebpbMeta;
+    }
+
+    static create(properties: ISearchResultRequest): SearchResultRequest {
+        return new SearchResultRequest(properties);
     }
 }

@@ -12,33 +12,36 @@ import {
 interface State {
   searchValue: string;
   hotSearch: string[];
-  searchHistory:string[];
+  searchHistory: string[];
 }
 
 class SearchPage extends WxPage<State> {
   data = {
     searchValue: "",
-    hotSearch: ["Hot-1", "Salary", "Leave Policy"],
-    searchHistory: ["Test", "Test2"],
+    hotSearch: [],
+    searchHistory: [],
   };
 
   onLoad(_query: Record<string, string | undefined>) {
-    // wx.hideHomeButton();
-    this.getHotSearchTags().subscribe((res) =>
-      {
-        this.setData({ hotSearch: res.entries.entries });}
-    );
+    this.getHotSearchTags().subscribe((res) => {
+      this.setData({ hotSearch: res.entries.entries });
+    });
     this.getSearchHistoryTags().subscribe((res) =>
       this.setData({ searchHistory: res.entries.entries })
     );
   }
 
-  onChange(event) {
-    console.log(event.detail);
+  onSearch(event) {
+    wx.navigateTo({
+      url: "/pages/search-result/search-result?key=" + this.data.searchValue,
+    });
   }
 
   searchTag(event) {
     this.setData({ searchValue: event.target.dataset.hi });
+    wx.navigateTo({
+      url: "/pages/search-result/search-result?key=" + this.data.searchValue,
+    });
   }
 
   getHotSearchTags(): Subscribable<HotSearchResponse> {

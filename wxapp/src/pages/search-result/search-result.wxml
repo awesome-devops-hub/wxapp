@@ -1,0 +1,55 @@
+<view>
+	<view>
+		<van-search
+		 input-class="search-box"
+		 value="{{ searchValue }}"
+		 placeholder="请输入搜索关键词"
+		 bind:search="onSearch"
+		/>
+	</view>
+	<view wx:if="{{loading}}">
+		<view class="skeleton-box">
+			<van-skeleton title row="4" />
+			<van-skeleton title row="4" />
+		</view>
+	</view>
+	<view wx:else>
+		<view wx:if="{{dataResult.length > 0}}">
+			<van-tabs active="{{ activeTab }}" color="#4CA663" bind:change="tabChange">
+				<van-tab
+				 wx:for="{{dataResult}}"
+				 wx:key="tabid"
+				 wx:for-item="tab"
+				 title="{{tab.module}}"
+				>
+					<view class="result-box">
+						<view
+						 wx:for="{{tab.entries}}"
+						 wx:key="idx"
+						 wx:for-item="item"
+						 class="item"
+						>
+							<van-tag size="medium" class="item-tag">{{item.category}}</van-tag>
+							<navigator class="lnk" url="/pages/index/index" open-type="navigate">
+								{{item.title}}
+							</navigator>
+						</view>
+					</view>
+					<view class="pager">
+						<view
+						 wx:if="{{tab.paging.page*tab.paging.size<=tab.paging.totalCount}}"
+						 class="p-btn bubble"
+						 data-page="{{tab.paging}}"
+						 bindtap="pageChange"
+						>
+							查看更多
+						</view>
+						<view wx:else class="p-btn">没有了</view>
+					</view>
+				</van-tab>
+			</van-tabs>
+		</view>
+		<view wx:else class="no-result">暂无相关结果</view>
+	</view>
+</view>
+

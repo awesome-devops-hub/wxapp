@@ -15,6 +15,18 @@ message HotSearchPb{
     repeated string entries = 1;
 }
 
+message articlePb{
+    required string id = 1;
+    required string title = 2;
+    required string category = 3;
+}
+
+message SearchResultPb{
+    required string module =1;
+    repeated articlePb entries = 2;
+    required ResourceProto.PagingPb paging = 3;
+}
+
 message HotSearchResponse {
     required ResourceProto.PagingPb paging = 1;
     required HotSearchPb  entries= 2;
@@ -23,6 +35,10 @@ message HotSearchResponse {
 message SearchHistoryResponse {
     required ResourceProto.PagingPb paging = 1;
     required SearchHistoryPb  entries= 2;
+}
+
+message SearchResultResponse{
+    repeated SearchResultPb data= 1;
 }
 
 message HotSearchRequest {
@@ -36,5 +52,13 @@ message SearchHistoryRequest {
     option (path) = '/api/search/history?page={pageable.page}&size={pageable.size}';
     required ResourceProto.PageablePb pageable = 1 [(omitted) = true];
 
+}
+
+message SearchResultRequest {
+    option (method) = 'GET';
+    option (path) = '/api/search/result?page={pageable.page}&size={pageable.size}&key={key}&module={module}';
+    required ResourceProto.PageablePb pageable = 1;
+    required string key = 2;
+    optional string module = 3;
 }
 

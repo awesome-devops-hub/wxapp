@@ -1,0 +1,12 @@
+{
+    "enablePullDownRefresh": false,
+    "usingComponents": {
+        "van-search": "/components/vant/search/index",
+        "van-skeleton": "/components/vant/skeleton/index",
+        "van-tab": "/components/vant/tab/index",
+        "van-tabs": "/components/vant/tabs/index",
+        "van-tag": "/components/vant/tag/index",
+        "van-button": "/components/vant/button/index"
+    },
+    "navigationBarTitleText": "搜索"
+}

@@ -8,7 +8,8 @@ import { mockSearch } from "./modules/MockSearch";
 
 export interface MockData {
     request: { prototype: WebpbMessage },
-    response: (request: any) => any
+    response: (request: any) => any,
+    delay?: number
 }
 
 const mockList: MockData[] = [...mockUser, ...mockSearch];
@@ -25,7 +26,12 @@ httpService.wxRequest = (option: RequestOption): RequestTask => {
             data: data.response(message)
         } as any;
         console.log(['response', response.data]);
-        option.success(response);
+        const delay = data.delay || 0;
+        if (delay) {
+            setTimeout(() => option.success(response), delay);
+        } else {
+            option.success(response);
+        }
     }
     return undefined;
 };

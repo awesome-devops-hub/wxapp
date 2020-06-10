@@ -51,3 +51,31 @@ describe("search page", () => {
 })
 
 
+/*
+  Story: #11 搜索页面结果
+*/
+describe("search result page", () => {
+
+    let search_page;
+
+    beforeAll(async () => {
+        const page = await miniprogram.reLaunch("/pages/index/index");
+        await (await page.$("navigator")).tap();
+        await page.waitFor(1000);
+        search_page = await miniprogram.currentPage();
+    }, 30000)
+    
+
+    it("Should see search result page when searching a keyword", async () => {
+        const search_input = await search_page.$("input.search-box");
+        const keyword = "test";
+        await search_input.input(keyword);
+        const search_result_page = await miniprogram.navigateTo("/pages/search-result/search-result?key=" + keyword);
+        const search_result_wxml = await(await search_result_page.$("van-tabs")).outerWxml();
+        expect_or(
+            () => expect(search_result_wxml).toContain("News"),
+            () => expect(search_result_wxml).toContain("Policy"),
+            () => expect(search_result_wxml).toContain("暂无相关结果")
+        )
+    })
+})

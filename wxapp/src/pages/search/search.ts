@@ -36,7 +36,7 @@ class SearchPage extends WxPage<State> {
     this.setData({ searchValue: inputted });
     if (inputted.length > 0) {
       wx.navigateTo({
-        url: "/pages/search-result/search-result?key=" + event.detail,
+        url: "/pages/search-result/search-result?key=" + inputted,
       });
     }
   }

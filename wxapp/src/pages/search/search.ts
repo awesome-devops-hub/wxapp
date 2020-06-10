@@ -32,10 +32,13 @@ class SearchPage extends WxPage<State> {
   }
 
   onSearch(event) {
-    this.setData({ searchValue: event.detail });
-    wx.navigateTo({
-      url: "/pages/search-result/search-result?key=" + event.detail,
-    });
+    let inputted = event.detail.trim();
+    this.setData({ searchValue: inputted });
+    if (inputted.length > 0) {
+      wx.navigateTo({
+        url: "/pages/search-result/search-result?key=" + event.detail,
+      });
+    }
   }
 
   searchTag(event) {

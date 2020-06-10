@@ -58,8 +58,11 @@ class SearchResultPage extends WxPage<State> {
   }
 
   onSearch(event) {
-    this.setData({ searchValue: event.detail });
-    this.initSearch();
+    let inputted = event.detail.trim();
+    this.setData({ searchValue: inputted });
+    if (inputted.length > 0) {
+      this.initSearch();
+    }
   }
 
   tabChange(event) {

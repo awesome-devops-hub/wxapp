@@ -9,6 +9,5 @@ module.exports = {
                 "includeFailureMsg": true
             }
         ]
-    ],
-    "testEnvironment": "./src/functional_test/miniprogram_environment.js"
+    ]
 };

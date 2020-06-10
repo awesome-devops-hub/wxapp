@@ -1,7 +1,13 @@
 {
-    "enablePullDownRefresh": true,
+    "enablePullDownRefresh": false,
     "usingComponents": {
         "van-icon": "/components/vant/icon/index",
-        "van-button": "/components/vant/button/index"
-    }
+        "van-button": "/components/vant/button/index",
+        "van-search": "/components/vant/search/index",
+        "van-skeleton": "/components/vant/skeleton/index",
+        "van-tabs": "/components/vant/tabs/index",
+        "van-tab": "/components/vant/tab/index",
+        "article-card": "/components/utils/article-card/index"
+    },
+    "navigationBarTitleText": "新闻"
 }

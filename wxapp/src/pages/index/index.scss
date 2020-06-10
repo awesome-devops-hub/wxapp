@@ -1,5 +1,71 @@
 .page {
-    .center {
-        margin: 100px auto;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+    .loading {
+        flex-grow: 1;
+    }
+    .content {
+        //background-color: #fff;
+    }
+    .skeleton {
+        margin-bottom: 20px;
+    }
+}
+
+.loading {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-y: hidden;
+    padding: 20px 0;
+    background-color: #fff;
+}
+
+.content {
+    .article-box {
+        padding-top: 10px;
+        max-height: 100%;
+    }
+}
+
+.pager {
+    display: flex;
+    justify-content: center;
+    padding: .5rem 1rem;
+
+    .p-btn {
+        color: #9f9f9f;
+        font-size: 14px;
+        padding: .5rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    .bubble {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .bubble:after {
+        content: "";
+        background: #4CA663;
+        position: absolute;
+        width: 750rpx;
+        height: 750rpx;
+        left: calc(50% - 375rpx);
+        top: calc(50% - 375rpx);
+        opacity: 0;
+        margin: auto;
+        border-radius: 50%;
+        transform: scale(1);
+        transition: all 0.4s ease-in-out;
+    }
+
+    .bubble:active:after {
+        transform: scale(0);
+        opacity: 1;
+        transition: 0s;
     }
 }

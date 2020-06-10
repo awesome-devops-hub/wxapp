@@ -5,6 +5,7 @@ import find from 'lodash/find';
 import { httpService } from '../core/service/HttpService';
 import { mockUser } from './modules/MockUser';
 import { mockSearch } from "./modules/MockSearch";
+import { mockArticle } from "./modules/MockArticle";
 
 export interface MockData {
     request: { prototype: WebpbMessage },
@@ -12,7 +13,7 @@ export interface MockData {
     delay?: number
 }
 
-const mockList: MockData[] = [...mockUser, ...mockSearch];
+const mockList: MockData[] = [...mockUser, ...mockSearch, ...mockArticle];
 
 httpService.wxRequest = (option: RequestOption): RequestTask => {
     const message: WebpbMessage = option['__message'];

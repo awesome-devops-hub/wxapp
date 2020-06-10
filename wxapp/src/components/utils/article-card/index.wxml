@@ -1,0 +1,12 @@
+<view class="item">
+  <div class="info-box">
+    <view class="title">{{title}}</view>
+    <view class="info">
+      <van-tag size="medium">{{category}}</van-tag>
+      <text class="date">三天前</text>
+    </view>
+  </div>
+  <div class="image-box">
+    <image src="/assets/images/empty.png"></image>
+  </div>
+</view>

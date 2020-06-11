@@ -3,14 +3,13 @@
     flex-direction: column;
     height: 100vh;
 
-    .loading {
+    .skeleton-box {
         flex-grow: 1;
-    }
-    .content {
-        //background-color: #fff;
-    }
-    .skeleton {
-        margin-bottom: 20px;
+        background-color: #fff;
+        padding: 20px 0;
+        .skeleton {
+            margin-bottom: 20px;
+        }
     }
 }
 

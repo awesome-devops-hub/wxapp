@@ -1,12 +1,12 @@
-<view class="item">
+<view class="item" bindtap="onTap">
   <div class="info-box">
     <view class="title">{{title}}</view>
     <view class="info">
-      <van-tag size="medium">{{category}}</van-tag>
-      <text class="date">三天前</text>
+      <van-tag class="tag" size="medium">{{category}}</van-tag>
+      <text class="date">{{date}}</text>
     </view>
   </div>
   <div class="image-box">
-    <image src="/assets/images/empty.png"></image>
+    <image class="image" src="/assets/images/empty.png"></image>
   </div>
 </view>

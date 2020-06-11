@@ -5,41 +5,50 @@
     placeholder="点击搜索"
     bind:focus="onSearch"
   ></van-search>
-  <view wx:if="{{ !loading }}" class="content">
-    <van-tabs sticky class="article-tabs">
+  <view wx:if="{{ !loading }}">
+    <van-tabs
+      class="article-tabs"
+      bind:change="onTabChange"
+      active="{{activeTab}}"
+    >
       <van-tab
         wx:for="{{ modules }}"
         wx:for-item="tab"
         wx:key="id"
         title="{{tab.title}}"
+        name="{{tab.id}}"
         class="article-tab"
       >
-        <scroll-view class="article-box" wx:if="{{ !loadingArticle }}">
-          <article-card category="博客大赛" title="博客大赛实在是太好看了博客大赛实在是太好看了博客大赛实在是太好看了"></article-card>
-          <article-card category="博客大赛" title="博客大赛实在是太好看了"></article-card>
-          <article-card category="博客大赛" title="博客大赛实在是太好看了"></article-card>
-          <article-card category="博客大赛" title="博客大赛实在是太好看了"></article-card>
+        <view wx:if="{{ !loadingArticle }}" class="article-box">
+          <article-card
+            wx:for="{{ articles }}"
+            wx:for-item="article"
+            wx:key="id"
+            title="{{article.title}}"
+            category="{{article.category}}"
+            date="{{article.date}}"
+            class="article-tab"
+          ></article-card>
           <view class="pager">
-            <view
-              wx:if="{{true}}"
-              class="p-btn bubble"
-              data-page="{{tab.paging}}"
-              bindtap="loadMore"
+            <van-button
+              type="primary"
+              wx:if="{{totalCount > articles.length}}"
+              loading="{{loadingMoreArticle}}"
+              loading-text="加载中..."
+              bind:click="onLoadMore"
             >
               查看更多
-            </view>
-            <view wx:else class="p-btn">没有了</view>
+            </van-button>
+            <view wx:else class="p-btn">无更多内容</view>
           </view>
-        </scroll-view>
-        <view class="article-box" wx:else>
-          <van-skeleton class="skeleton" title row="8"/>
+        </view>
+        <view wx:else class="skeleton-box">
+          <van-skeleton class="skeleton" title row="10"/>
         </view>
       </van-tab>
     </van-tabs>
   </view>
-  <view wx:else class="loading">
-    <van-skeleton class="skeleton" title row="6"/>
-    <van-skeleton class="skeleton" title row="3"/>
-    <van-skeleton class="skeleton" title row="4"/>
+  <view wx:else class="skeleton-box">
+    <van-skeleton class="skeleton" title row="10"/>
   </view>
 </view>

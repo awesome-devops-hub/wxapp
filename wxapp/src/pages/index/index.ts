@@ -1,65 +1,107 @@
-import { Subscribable } from 'rxjs';
 import { httpService } from '../../core/service/HttpService';
 import { WxPage } from '../../core/wx/WxPage';
-import { HelloRequest, HelloResponse } from '../../protocol/UserProto';
-import { RxWx } from '../../core/utils/RxWx';
 import { pagify } from '../../core/utils/Utils';
-import { ArticleModuleRequest, ArticleModuleResponse } from "../../protocol/ArticleProto";
+import {
+  ArticleListRequest,
+  ArticleListResponse,
+  ArticleModuleRequest,
+  ArticleModuleResponse,
+  IArticleListRequest
+} from "../../protocol/ArticleProto";
 
 interface State {
-    extraData: any
+  extraData: any
 }
 
 class IndexPage extends WxPage<State> {
 
-    data = {
-        loading: true,
-        loadingArticle: true,
-        modules: [],
-        activeTab: '',
-        extraData: { url: 'https://www.baidu.com' }
-    };
+  data = {
+    loading: true,
+    loadingArticle: true,
+    loadingMoreArticle: false,
+    modules: [],
+    articles: [],
+    activeTab: '',
+    pageable: { page: 1, size: 5 },
+    totalCount: 0,
+    extraData: { url: 'https://www.baidu.com' }
+  };
 
-    onLoad(_query: Record<string, string | undefined>) {
-        this.init().subscribe((res: ArticleModuleResponse) => {
-            this.setData({
-                modules: res.modules,
-                activeTab: res.modules[0]?.id,
-                loading: false,
-            });
+  onLoad(_query: Record<string, string | undefined>) {
+    this.init();
+  }
+
+  onSearch() {
+    wx.navigateTo({ url: '/pages/search/search' });
+  }
+
+  onLoadMore() {
+    if (this.data.loadingMoreArticle) {
+      return;
+    }
+    this.setData({
+      loadingMoreArticle: true,
+    });
+    this.loadMoreArticle();
+  }
+
+  onTabChange(e) {
+    const name = e?.detail?.name;
+    this.setData({
+      activeTab: name,
+      loadingArticle: true,
+    }, () => {
+      this.reloadArticle();
+    });
+  }
+
+  init() {
+    return httpService.request(ArticleModuleRequest.create())
+      .subscribe((res: ArticleModuleResponse) => {
+        this.setData({
+          modules: res.modules,
+          activeTab: res.modules[0]?.id,
+          loading: false,
         });
-        setTimeout(() => this.setData({ loadingArticle: false }), 500);
-    }
+        this.reloadArticle();
+      });
+  }
 
-    onPullDownRefresh() {
-        // this.reload().subscribe(res => {
-        //     wx.stopPullDownRefresh();
-        //     this.setData({ message: res.message });
-        // });
-    }
+  reloadArticle() {
+    const payload: IArticleListRequest = {
+      pageable: { page: 1, size: 5 },
+      module: this.data.activeTab
+    };
+    httpService.request(ArticleListRequest.create(payload))
+      .subscribe((res) => {
+        this.setData({
+          articles: res.entries,
+          pageable: { page: res.pageable.page, size: res.pageable.size },
+          totalCount: res.pageable.totalCount,
+          loadingArticle: false
+        });
+      });
+  }
 
-    onSearch() {
-        wx.navigateTo({ url: '/pages/search/search' });
-    }
-
-    init() {
-        return httpService.request(ArticleModuleRequest.create());
-    }
-
-    reload(): Subscribable<HelloResponse> {
-        return httpService.request(HelloRequest.create());
-    }
-
-    loadMore() {
-        return httpService.request(HelloRequest.create());
-    }
-
-    openWebview() {
-        RxWx.navigateTo('/pages/webview/webview', {
-            title: '百度',
-            url: 'https://www.baidu.com'
-        }).subscribe();
-    }
+  loadMoreArticle() {
+    const { pageable, articles, activeTab } = this.data;
+    const payload = {
+      pageable: {
+        ...pageable,
+        page: pageable.page + 1,
+      },
+      module: activeTab
+    };
+    httpService.request(ArticleListRequest.create(payload))
+      .subscribe((res: ArticleListResponse) => {
+        this.setData({
+          articles: [...articles, ...res.entries],
+          pageable: { page: res.pageable.page, size: res.pageable.size },
+          totalCount: res.pageable.totalCount,
+          loadingMoreArticle: false,
+        });
+      });
+  }
 }
 
 pagify(new IndexPage());

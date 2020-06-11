@@ -25,7 +25,7 @@ describe("search page", () => {
 
     beforeAll(async () => {
         const page = await miniprogram.reLaunch("/pages/index/index");
-        await (await page.$("navigator")).tap();
+        await (await page.$("input.van-field__input")).tap();
         await page.waitFor(1000);
         search_page = await miniprogram.currentPage();
     })
@@ -60,7 +60,7 @@ describe("search result page", () => {
 
     beforeAll(async () => {
         const page = await miniprogram.reLaunch("/pages/index/index");
-        await (await page.$("navigator")).tap();
+        await (await page.$("input.van-field__input")).tap();
         await page.waitFor(1000);
         search_page = await miniprogram.currentPage();
     }, 30000)

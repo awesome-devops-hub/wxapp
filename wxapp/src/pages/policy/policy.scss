@@ -1,0 +1,52 @@
+.section-header {
+    margin: 0;
+    padding: 40rpx;
+    color: rgba(69, 90, 100, 0.6);
+    font-weight: normal;
+    font-size: 26rpx;
+}
+
+.cust-grid-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 80rpx;
+    width: 100%;
+
+    .icon {
+        font-size: 40rpx;
+    }
+
+    .icon-alt {
+        font-size: 24rpx;
+        color: #232f3599
+    }
+
+}
+
+.inline-grids {
+    display: flex;
+
+    .child {
+        width: 100%
+    }
+}
+
+.policy {
+    padding: 10rpx;
+}
+.grid-img{
+    height: 80rpx;
+
+}
+.didi-img {
+    background: url('https://u.geelg.com/i/On9uXgz8prheID.png') no-repeat center;
+    background-size: 25%;
+    height: 100%;
+}
+.ctrip-img {
+    background: url('https://u.geelg.com/i/taKVyMcfbKj01u.png') no-repeat center;
+    background-size: 25%;
+    height: 100%;
+}

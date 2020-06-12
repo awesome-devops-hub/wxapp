@@ -1,11 +1,14 @@
 {
-  "enablePullDownRefresh": false,
-  "usingComponents": {
-    "van-field": "/components/vant/field/index",
-    "cell-group": "/components/vant/cell-group/index",
-    "van-tag": "/components/vant/tag/index",
-    "van-panel": "/components/vant/panel/index",
-    "van-search": "/components/vant/search/index"
-  },
-  "navigationBarTitleText": "政策"
+    "enablePullDownRefresh": false,
+    "usingComponents": {
+        "van-field": "/components/vant/field/index",
+        "cell-group": "/components/vant/cell-group/index",
+        "van-tag": "/components/vant/tag/index",
+        "van-panel": "/components/vant/panel/index",
+        "van-search": "/components/vant/search/index",
+        "van-grid": "/components/vant/grid/index",
+        "van-grid-item": "/components/vant/grid-item/index"
+    },
+    "navigationBarTitleText": "政策",
+    "styleIsolation": "shared"
 }

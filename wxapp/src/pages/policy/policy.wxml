@@ -1,113 +1,111 @@
 <view class="policy">
-  <view class="section-header">财务</view>
-  <van-grid gutter="{{ 1 }}">
-    <van-grid-item use-slot>
-      <view class="cust-grid-item">
-        <i class="fa fa-money icon" style="color:#DB443A" aria-hidden="true" />
-        <text class="icon-alt">报销政策</text>
-      </view>
-    </van-grid-item>
-    <van-grid-item use-slot>
-      <view class="cust-grid-item">
-        <i class="fa fa-info-circle icon" style="color:#EA575A" aria-hidden="true" />
-        <text class="icon-alt">发票信息</text>
-      </view>
-    </van-grid-item>
-  </van-grid>
-  <view class="section-header">差旅</view>
-  <van-grid gutter="{{ 1 }}">
-    <van-grid-item use-slot>
-      <view class="cust-grid-item">
-        <image class="ctrip-img" />
-        <text class="icon-alt">携程</text>
-      </view>
-    </van-grid-item>
-    <van-grid-item use-slot>
-       <view class="cust-grid-item">
-        <image class="didi-img" />
-        <text class="icon-alt">滴滴</text>
-      </view>
-    </van-grid-item>
-    <van-grid-item use-slot>
-      <view class="cust-grid-item">
-        <i class="fa fa-plane icon" aria-hidden="true" />
-        <text class="icon-alt">差旅指南</text>
-      </view>
-    </van-grid-item>
-    <van-grid-item use-slot>
-      <view class="cust-grid-item">
-        <i class="fa fa-h-square icon" aria-hidden="true" />
-        <text class="icon-alt">协议酒店</text>
-      </view>
-    </van-grid-item>
-  </van-grid>
-  <view class="section-header">员工关怀</view>
-  <van-grid column-num="5" gutter="{{ 1 }}">
-    <van-grid-item use-slot>
-      <view class="cust-grid-item">
-        <i class="fa fa-user-md icon" aria-hidden="true" />
-        <text class="icon-alt">体检</text>
-      </view>
-    </van-grid-item>
-    <van-grid-item use-slot>
-      <view class="cust-grid-item">
-        <i class="fa fa-h-square icon" aria-hidden="true" />
-        <text class="icon-alt">商保</text>
-      </view>
-    </van-grid-item>
-    <van-grid-item use-slot>
-      <view class="cust-grid-item">
-        <i class="fa fa-home icon" aria-hidden="true" />
-        <text class="icon-alt">公积金</text>
-      </view>
-    </van-grid-item>
-    <van-grid-item use-slot>
-      <view class="cust-grid-item">
-        <i class="fa fa-handshake-o icon" aria-hidden="true" />
-        <text class="icon-alt">EAP</text>
-      </view>
-    </van-grid-item>
-    <van-grid-item use-slot>
-      <view class="cust-grid-item">
-        <i class="fa fa-users icon" aria-hidden="true" />
-        <text class="icon-alt">企业团购</text>
-      </view>
-    </van-grid-item>
-  </van-grid>
-  <view class="inline-grids">
-    <view class="child">
-      <view class="section-header">假期</view>
-      <van-grid column-num="2" gutter="{{ 1 }}">
-        <van-grid-item use-slot>
-          <view class="cust-grid-item">
-            <i class="fa fa-umbrella icon" aria-hidden="true" />
-            <text class="icon-alt">假期查询</text>
-          </view>
-        </van-grid-item>
-        <van-grid-item use-slot>
-          <view class="cust-grid-item">
-            <i class="fa fa-files-o icon" aria-hidden="true" />
-            <text class="icon-alt">假期政策</text>
-          </view>
-        </van-grid-item>
-      </van-grid>
-    </view>
-    <view class="child">
-      <view class="section-header">其他</view>
-      <van-grid column-num="2" gutter="{{ 1 }}">
-        <van-grid-item use-slot>
-          <view class="cust-grid-item">
-            <i class="fa fa-phone icon" aria-hidden="true" />
-            <text class="icon-alt">联系Admin</text>
-          </view>
-        </van-grid-item>
-        <van-grid-item use-slot>
-          <view class="cust-grid-item">
-            <i class="fa fa-laptop icon" aria-hidden="true" />
-            <text class="icon-alt">电脑政策</text>
-          </view>
-        </van-grid-item>
-      </van-grid>
-    </view>
-  </view>
+	<view class="section-header">财务</view>
+	<van-grid column-num="2" gutter="{{ 1 }}">
+		<van-grid-item use-slot>
+			<view class="cust-grid-item">
+				<i class="fa fa-money icon" style="color:#DB443A" aria-hidden="true" />
+				<text class="icon-alt">报销政策</text>
+			</view>
+		</van-grid-item>
+		<van-grid-item use-slot>
+			<view class="cust-grid-item">
+				<i class="fa fa-info-circle icon" style="color:#EA575A" aria-hidden="true" />
+				<text class="icon-alt">发票信息</text>
+			</view>
+		</van-grid-item>
+	</van-grid>
+	<view class="section-header">差旅</view>
+	<van-grid gutter="{{ 1 }}">
+		<van-grid-item use-slot>
+			<view class="cust-grid-item">
+				<image class="ctrip-img" />
+				<text class="icon-alt">携程</text>
+			</view>
+		</van-grid-item>
+		<van-grid-item use-slot>
+			<view class="cust-grid-item">
+				<image class="didi-img" />
+				<text class="icon-alt">滴滴</text>
+			</view>
+		</van-grid-item>
+		<van-grid-item use-slot>
+			<view class="cust-grid-item">
+				<i class="fa fa-plane icon" style="color:#BDBB4E" aria-hidden="true" />
+				<text class="icon-alt">差旅指南</text>
+			</view>
+		</van-grid-item>
+		<van-grid-item use-slot>
+			<view class="cust-grid-item">
+				<i class="fa fa-h-square icon" style="color:#BDBB4E" aria-hidden="true" />
+				<text class="icon-alt">协议酒店</text>
+			</view>
+		</van-grid-item>
+	</van-grid>
+	<view class="section-header">员工关怀</view>
+	<van-grid column-num="5" gutter="{{ 1 }}">
+		<van-grid-item use-slot>
+			<view class="cust-grid-item">
+				<i class="fa fa-user-md icon" style="color:#6F5278" aria-hidden="true" />
+				<text class="icon-alt">体检</text>
+			</view>
+		</van-grid-item>
+		<van-grid-item use-slot>
+			<view class="cust-grid-item">
+				<i class="fa fa-university icon" style="color:#6F5278" aria-hidden="true" />
+				<text class="icon-alt">商保</text>
+			</view>
+		</van-grid-item>
+		<van-grid-item use-slot>
+			<view class="cust-grid-item">
+				<i class="fa fa-home icon" style="color:#6F5278" aria-hidden="true" />
+				<text class="icon-alt">公积金</text>
+			</view>
+		</van-grid-item>
+		<van-grid-item use-slot>
+			<view class="cust-grid-item">
+				<i class="fa fa-handshake-o icon" style="color:#6F5278" aria-hidden="true" />
+				<text class="icon-alt">EAP</text>
+			</view>
+		</van-grid-item>
+		<van-grid-item use-slot>
+			<view class="cust-grid-item">
+				<i class="fa fa-users icon" style="color:#6F5278" aria-hidden="true" />
+				<text class="icon-alt">企业团购</text>
+			</view>
+		</van-grid-item>
+	</van-grid>
+
+	<view class="section-header">假期</view>
+	<van-grid column-num="2" gutter="{{ 1 }}">
+		<van-grid-item use-slot>
+			<view class="cust-grid-item">
+				<i class="fa fa-umbrella icon" style="color:#4B7A89" aria-hidden="true" />
+				<text class="icon-alt">假期查询</text>
+			</view>
+		</van-grid-item>
+		<van-grid-item use-slot>
+			<view class="cust-grid-item">
+				<i class="fa fa-files-o icon" style="color:#4B7A89" aria-hidden="true" />
+				<text class="icon-alt">假期政策</text>
+			</view>
+		</van-grid-item>
+	</van-grid>
+
+	<view class="section-header">其他</view>
+	<van-grid column-num="2" gutter="{{ 1 }}">
+		<van-grid-item use-slot>
+			<view class="cust-grid-item">
+				<i class="fa fa-phone icon" style="color:#E88D48" aria-hidden="true" />
+				<text class="icon-alt">联系Admin</text>
+			</view>
+		</van-grid-item>
+		<van-grid-item use-slot>
+			<view class="cust-grid-item">
+				<i class="fa fa-laptop icon" style="color:#E88D48" aria-hidden="true" />
+				<text class="icon-alt">电脑政策</text>
+			</view>
+		</van-grid-item>
+	</van-grid>
+
 </view>
+

@@ -2,8 +2,8 @@
   <van-search
     class="search-box"
     value="{{ searchValue }}"
-    placeholder="点击搜索"
-    bind:focus="onSearch"
+    placeholder="请输入搜索关键词"
+    bindtap="onSearch"
   ></van-search>
   <view wx:if="{{ !loading }}">
     <van-tabs

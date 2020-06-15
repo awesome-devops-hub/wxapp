@@ -18,16 +18,19 @@
     "tabBar": {
         "list": [
             {
+                "text": "新闻",
                 "pagePath": "pages/index/index",
                 "iconPath": "./assets/tab-bar/homepage-light.png",
                 "selectedIconPath": "./assets/tab-bar/homepage.png"
             },
             {
+                "text": "政策",
                 "pagePath": "pages/policy/policy",
                 "iconPath": "./assets/tab-bar/policy-light.png",
                 "selectedIconPath": "./assets/tab-bar/policy.png"
             },
             {
+                "text": "消息",
                 "pagePath": "pages/message/message",
                 "iconPath": "./assets/tab-bar/message-light.png",
                 "selectedIconPath": "./assets/tab-bar/message.png"

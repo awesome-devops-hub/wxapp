@@ -35,6 +35,10 @@ class IndexPage extends WxPage<State> {
     wx.navigateTo({ url: '/pages/search/search' });
   }
 
+  onPullDownRefresh() {
+    this.reloadArticle();
+  }
+
   onLoadMore() {
     if (this.data.loadingMoreArticle) {
       return;
@@ -100,6 +104,7 @@ class IndexPage extends WxPage<State> {
           totalCount: res.pageable.totalCount,
           loadingMoreArticle: false,
         });
+        wx.stopPullDownRefresh();
       });
   }
 }

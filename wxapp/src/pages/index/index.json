@@ -1,5 +1,5 @@
 {
-    "enablePullDownRefresh": false,
+    "enablePullDownRefresh": true,
     "usingComponents": {
         "van-icon": "/components/vant/icon/index",
         "van-button": "/components/vant/button/index",

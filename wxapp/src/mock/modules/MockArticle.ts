@@ -14,14 +14,14 @@ const pagingMock = {
 };
 
 const articleModuleMock = [{
-  title: '新闻',
+  title: 'Newsletter',
   id: 'newsletter'
-}, {
-  title: '博客',
-  id: 'blog'
 }, {
   title: '活动',
   id: 'activity'
+}, {
+  title: '博客大赛',
+  id: 'blog'
 }, {
   title: 'Admin',
   id: 'admin'

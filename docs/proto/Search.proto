@@ -40,6 +40,10 @@ message SearchHistoryResponse {
 message SearchResultResponse{
     repeated SearchResultPb data= 1;
 }
+message TravelGuidesResponse{
+    repeated articlePb data = 1;
+    required ResourceProto.PagingPb paging = 2;
+}
 
 message HotSearchRequest {
     option (method) = 'GET';
@@ -61,4 +65,11 @@ message SearchResultRequest {
     required string key = 2;
     optional string module = 3;
 }
+
+message TravelGuidesRequest {
+    option (method) = 'GET';
+    option (path) = '/api/search/travel/guides?page={pageable.page}&size={pageable.size}';
+    required ResourceProto.PageablePb pageable = 1;
+}
+
 

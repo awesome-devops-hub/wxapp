@@ -171,6 +171,30 @@ export class SearchResultResponse implements ISearchResultResponse {
     }
 }
 
+export interface ITravelGuidesResponse {
+    data: IarticlePb[];
+    paging: ResourceProto.IPagingPb;
+}
+
+export class TravelGuidesResponse implements ITravelGuidesResponse {
+    data!: IarticlePb[];
+    paging!: ResourceProto.IPagingPb;
+    META: () => Webpb.WebpbMeta;
+
+    private constructor(p?: ITravelGuidesResponse) {
+        Webpb.assign(p, this, []);
+        this.META = () => (p && {
+            class: 'TravelGuidesResponse',
+            method: '',
+            path: ''
+        }) as Webpb.WebpbMeta;
+    }
+
+    static create(properties: ITravelGuidesResponse): TravelGuidesResponse {
+        return new TravelGuidesResponse(properties);
+    }
+}
+
 export interface IHotSearchRequest {
     pageable: ResourceProto.IPageablePb;
 }
@@ -249,5 +273,30 @@ export class SearchResultRequest implements ISearchResultRequest, Webpb.WebpbMes
 
     static create(properties: ISearchResultRequest): SearchResultRequest {
         return new SearchResultRequest(properties);
+    }
+}
+
+export interface ITravelGuidesRequest {
+    pageable: ResourceProto.IPageablePb;
+}
+
+export class TravelGuidesRequest implements ITravelGuidesRequest, Webpb.WebpbMessage {
+    pageable!: ResourceProto.IPageablePb;
+    META: () => Webpb.WebpbMeta;
+
+    private constructor(p?: ITravelGuidesRequest) {
+        Webpb.assign(p, this, []);
+        this.META = () => (p && {
+            class: 'TravelGuidesRequest',
+            method: 'GET',
+            path: `/api/search/travel/guides${Webpb.query({
+                page: Webpb.getter(p, 'pageable.page'),
+                size: Webpb.getter(p, 'pageable.size'),
+            })}`
+        }) as Webpb.WebpbMeta;
+    }
+
+    static create(properties: ITravelGuidesRequest): TravelGuidesRequest {
+        return new TravelGuidesRequest(properties);
     }
 }

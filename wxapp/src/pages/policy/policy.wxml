@@ -28,7 +28,7 @@
 				<text class="icon-alt">滴滴</text>
 			</view>
 		</van-grid-item>
-		<van-grid-item use-slot>
+		<van-grid-item use-slot link-type="navigateTo" url="/pages/policy/travel/guide/guide">
 			<view class="cust-grid-item">
 				<i class="fa fa-plane icon" style="color:#BDBB4E" aria-hidden="true" />
 				<text class="icon-alt">差旅指南</text>
@@ -74,7 +74,6 @@
 			</view>
 		</van-grid-item>
 	</van-grid>
-
 	<view class="section-header">假期</view>
 	<van-grid column-num="2" gutter="{{ 1 }}">
 		<van-grid-item use-slot>
@@ -90,7 +89,6 @@
 			</view>
 		</van-grid-item>
 	</van-grid>
-
 	<view class="section-header">其他</view>
 	<van-grid column-num="2" gutter="{{ 1 }}">
 		<van-grid-item use-slot>
@@ -106,6 +104,5 @@
 			</view>
 		</van-grid-item>
 	</van-grid>
-
 </view>
 

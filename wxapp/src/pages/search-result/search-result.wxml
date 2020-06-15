@@ -30,7 +30,7 @@
 						 class="item"
 						>
 							<van-tag size="medium" class="item-tag">{{item.category}}</van-tag>
-							<navigator class="lnk" url="/pages/index/index" open-type="navigate">
+							<navigator class="lnk" url="/pages/webview/webview?url=https://wxapp.qun.cool/blog/blog-05.html" open-type="navigate">
 								{{item.title}}
 							</navigator>
 						</view>

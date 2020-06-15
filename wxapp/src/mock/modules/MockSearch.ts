@@ -6,6 +6,8 @@ import {
   SearchHistoryResponse,
   SearchResultRequest,
   SearchResultResponse,
+  TravelGuidesRequest,
+  TravelGuidesResponse,
   ISearchResultPb,
 } from "../../protocol/SearchProto";
 
@@ -130,6 +132,21 @@ export const mockSearch: MockData[] = [
         data: generateSearchResult(),
       });
     },
-    delay: 500
+    delay: 500,
+  },
+  {
+    request: TravelGuidesRequest,
+    response: (req: TravelGuidesRequest) => {
+      return TravelGuidesResponse.create({
+        data: articleEntriesMock.slice(getRandomIntInclusive(0, 5)),
+        paging: {
+          page: req.pageable.page,
+          size: 5,
+          totalCount: 18,
+          totalPage: 4,
+        },
+      });
+    },
+    delay: 500,
   },
 ];

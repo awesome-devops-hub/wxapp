@@ -1,0 +1,7 @@
+{
+    "enablePullDownRefresh": false,
+    "usingComponents": {},
+    "navigationBarTitleText": "差旅指南",
+    "styleIsolation": "shared"
+
+}

@@ -79,3 +79,44 @@ describe("search result page", () => {
         )
     })
 })
+
+
+/*
+  Story: #15 新闻页面各模块文章list页面
+*/
+describe("News page", () => {
+
+    let page;
+
+    beforeAll(async () => {
+        page = await miniprogram.reLaunch("/pages/index/index");
+        await page.waitFor(500);
+    }, 30000)
+
+    it("4 Tabs should present", async () => {
+        const navigator_bar = await page.$("view.van-tabs__nav.van-tabs__nav--line");
+        const nav_bar_text = await navigator_bar.text();
+        expect(nav_bar_text).toContain("Newsletter");
+        expect(nav_bar_text).toContain("活动");
+        expect(nav_bar_text).toContain("博客大赛");
+        expect(nav_bar_text).toContain("Admin");
+    })
+
+    it("The first tab should contain article card", async() => {
+        await expect_article_card_to_exist(page);
+    })
+
+    it("The second tab should contain article card", async() => {
+        const tabs_selector = "view.van-tabs__nav.van-tabs__nav--line view.van-ellipsis.van-tab"
+        const second_tab_elem = (await page.$$(tabs_selector))[1];
+        await second_tab_elem.tap();
+        await page.waitFor(1500);
+        await expect_article_card_to_exist(page);
+    })
+
+    async function expect_article_card_to_exist(page) {
+        const content_container = await page.$("van-tab.article-tab");
+        const content_container_wxml = await content_container.outerWxml();
+        expect(content_container_wxml).toContain("<article-card ");
+    }
+})

@@ -11,6 +11,10 @@ class MessagePage extends WxPage<State> {
   onLoad(_query: Record<string, string | undefined>) {
   }
 
+  onShow() {
+    typeof this.getTabBar === 'function' && this.getTabBar().setData({ active: 2 });
+  }
+
   onChange(event) {
     console.log(event.detail);
   }

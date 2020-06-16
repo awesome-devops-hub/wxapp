@@ -31,6 +31,10 @@ class IndexPage extends WxPage<State> {
     this.init();
   }
 
+  onShow() {
+    typeof this.getTabBar === 'function' && this.getTabBar().setData({ active: 0 });
+  }
+
   onSearch() {
     wx.navigateTo({ url: '/pages/search/search' });
   }

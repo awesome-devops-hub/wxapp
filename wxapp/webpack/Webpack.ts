@@ -5,6 +5,8 @@ import { Environment } from '../env/env';
 import * as globby from 'fast-glob';
 
 export class EntryResolver {
+    CUSTOM_TAB_BAR = 'custom-tab-bar/index'
+
     constructor(private srcDir: string) {
     }
 
@@ -47,7 +49,7 @@ export class EntryResolver {
     }
 
     private getEntries(rootDir: string, patterns: string[]) {
-        let fileList = globby.sync(patterns)
+        let fileList = globby.sync(patterns);
         return fileList.reduce((value, current) => {
             let filePath = parse(relative(rootDir, current));
             let entry = join(filePath.dir, filePath.name);
@@ -64,7 +66,7 @@ export class EntryResolver {
     }
 
     resolve(environment: Environment) {
-        const pages = this.getPages();
+        const pages = [...this.getPages(), this.CUSTOM_TAB_BAR];
         const components = this.getComponents(pages);
         return pickBy({
             ...this.getEntries(this.srcDir, [this.srcDir + '/*']),

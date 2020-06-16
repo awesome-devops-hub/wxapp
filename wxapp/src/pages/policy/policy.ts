@@ -8,6 +8,11 @@ class PolicyPage extends WxPage<State> {
 
   onLoad(_query: Record<string, string | undefined>) {}
 
+  onShow() {
+    typeof this.getTabBar === "function" &&
+      this.getTabBar().setData({ active: 1 });
+  }
+
   onChange(event) {
     console.log(event.detail);
   }

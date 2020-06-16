@@ -71,12 +71,18 @@ describe("search result page", () => {
         const keyword = "test";
         await search_input.input(keyword);
         const search_result_page = await miniprogram.navigateTo("/pages/search-result/search-result?key=" + keyword);
-        const search_result_wxml = await(await search_result_page.$("van-tabs")).outerWxml();
-        expect_or(
-            () => expect(search_result_wxml).toContain("News"),
-            () => expect(search_result_wxml).toContain("Policy"),
-            () => expect(search_result_wxml).toContain("暂无相关结果")
-        )
+        try {
+            const search_result_wxml = await(await search_result_page.$("van-tabs")).outerWxml();
+            expect_or(
+                () => expect(search_result_wxml).toContain("News"),
+                () => expect(search_result_wxml).toContain("Policy"),
+                () => expect(search_result_wxml).toContain("暂无相关结果")
+            )
+        }
+        catch(e) {
+            const empty_search_result_elem = await search_result_page.$("view.no-result");
+            expect(empty_search_result_elem).toBeTruthy();
+        }
     })
 })
 

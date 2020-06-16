@@ -16,13 +16,13 @@
 	</van-grid>
 	<view class="section-header">差旅</view>
 	<van-grid gutter="{{ 1 }}">
-		<van-grid-item use-slot>
+		<van-grid-item use-slot bind:click="toCtrip">
 			<view class="cust-grid-item">
 				<image class="ctrip-img" />
 				<text class="icon-alt">携程</text>
 			</view>
 		</van-grid-item>
-		<van-grid-item use-slot>
+		<van-grid-item use-slot bind:click="toDidi">
 			<view class="cust-grid-item">
 				<image class="didi-img" />
 				<text class="icon-alt">滴滴</text>

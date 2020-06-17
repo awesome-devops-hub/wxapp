@@ -76,7 +76,7 @@
 	</van-grid>
 	<view class="section-header">假期</view>
 	<van-grid column-num="2" gutter="{{ 1 }}">
-		<van-grid-item use-slot>
+		<van-grid-item use-slot bind:click="showAnnualLeaveDialogue">
 			<view class="cust-grid-item">
 				<i class="fa fa-umbrella icon" style="color:#4B7A89" aria-hidden="true" />
 				<text class="icon-alt">假期查询</text>
@@ -105,4 +105,13 @@
 		</van-grid-item>
 	</van-grid>
 </view>
+<van-popup
+ show="{{ annualLeaveDialogue }}"
+ closeable
+ bind:close="onDialogueClose"
+ custom-style="height: 20%;width:80%;padding: 2rem;"
+>
+	<view>截止{{dateInfo}}，您已休{{leaveInfo.taken}}天年假，剩余{{leaveInfo.balanceToDate}}天年假</view>
+	<view>截止{{dateYear}}年12月31日剩余{{leaveInfo.balanceToYearEnd}}天年假</view>
+</van-popup>
 

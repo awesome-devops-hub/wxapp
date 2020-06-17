@@ -1,12 +1,36 @@
 import { WxPage } from "../../core/wx/WxPage";
 import { pagify } from "../../core/utils/Utils";
 
-interface State {}
+interface State {
+  annualLeaveDialogue: boolean;
+  leaveInfo: { taken: string; balanceToDate: string; balanceToYearEnd: string };
+  dateYear: string;
+  dateInfo: string;
+}
 
 class PolicyPage extends WxPage<State> {
-  data = {};
+  data = {
+    annualLeaveDialogue: false,
+    leaveInfo: { taken: "0", balanceToDate: "0", balanceToYearEnd: "0" },
+    dateYear: "",
+    dateInfo: "",
+  };
 
-  onLoad(_query: Record<string, string | undefined>) {}
+  onLoad(_query: Record<string, string | undefined>) {
+    this.setData({
+      leaveInfo: { taken: "3", balanceToDate: "7", balanceToYearEnd: "15" },
+    });
+    this.setDateString();
+  }
+
+  setDateString() {
+    let d = Date.now();
+    const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
+    const mo = new Intl.DateTimeFormat("en", { month: "numeric" }).format(d);
+    const da = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(d);
+    this.setData({ dateYear: ye });
+    this.setData({ dateInfo: ye + "年" + mo + "月" + da + "日" });
+  }
 
   onShow() {
     typeof this.getTabBar === "function" &&
@@ -48,6 +72,13 @@ class PolicyPage extends WxPage<State> {
         console.log("to ctrip", res);
       },
     });
+  }
+
+  showAnnualLeaveDialogue() {
+    this.setData({ annualLeaveDialogue: true });
+  }
+  onDialogueClose() {
+    this.setData({ annualLeaveDialogue: false });
   }
 }
 

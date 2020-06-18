@@ -1,0 +1,24 @@
+syntax = "proto2";
+
+package LeaveProto;
+
+option java_package = "cool.qun.estate.backend.protocol.leave";
+
+import "Resource.proto";
+import "WebpbOptions.proto";
+
+message AnnualLeavePb{
+    required string taken = 1;
+    required string balanceToDate = 2;
+    required string balanceToYearEnd = 3;
+}
+
+message AnnualLeaveInfoResponse{
+    required AnnualLeavePb data = 1;
+}
+
+message AnnualLeaveInfoRequest {
+    option (method) = 'GET';
+    option (path) = '/api/policy/leave/balance?email={email}';
+    required string email = 1;
+}

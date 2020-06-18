@@ -1,9 +1,17 @@
+import { Subscribable } from "rxjs";
+import { httpService } from "../../core/service/HttpService";
 import { WxPage } from "../../core/wx/WxPage";
 import { pagify } from "../../core/utils/Utils";
+import {
+  AnnualLeaveInfoRequest,
+  IAnnualLeaveInfoRequest,
+  AnnualLeaveInfoResponse,
+  IAnnualLeavePb,
+} from "../../protocol/LeaveProto";
 
 interface State {
   annualLeaveDialogue: boolean;
-  leaveInfo: { taken: string; balanceToDate: string; balanceToYearEnd: string };
+  leaveInfo: IAnnualLeavePb;
   dateYear: string;
   dateInfo: string;
 }
@@ -17,9 +25,21 @@ class PolicyPage extends WxPage<State> {
   };
 
   onLoad(_query: Record<string, string | undefined>) {
-    this.setData({
-      leaveInfo: { taken: "3", balanceToDate: "7", balanceToYearEnd: "15" },
+    this.getAnnualLeaveInfoByEmail({
+      email: "user_email",
+    }).subscribe((res) => {
+      console.log("leave req", res);
+      if (res.data) {
+        this.setData({
+          leaveInfo: res.data,
+        });
+      } else {
+        this.setData({
+          leaveInfo: { taken: "3", balanceToDate: "7", balanceToYearEnd: "15" },
+        });
+      }
     });
+
     this.setDateString();
   }
 
@@ -79,6 +99,12 @@ class PolicyPage extends WxPage<State> {
   }
   onDialogueClose() {
     this.setData({ annualLeaveDialogue: false });
+  }
+
+  getAnnualLeaveInfoByEmail(
+    req: IAnnualLeaveInfoRequest
+  ): Subscribable<AnnualLeaveInfoResponse> {
+    return httpService.request(AnnualLeaveInfoRequest.create(req));
   }
 }
 

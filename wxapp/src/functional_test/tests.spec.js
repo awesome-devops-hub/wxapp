@@ -2,6 +2,7 @@ const automator = require("miniprogram-automator");
 const expect_or = require("./helpers/expect_or.js");
 
 let miniprogram;
+const remote = true;
 
 jest.setTimeout(60000);
 
@@ -9,6 +10,9 @@ beforeAll(async () => {
     miniprogram = await automator.launch({
       projectPath: "../wxapp"
     })
+    if(remote == true) {
+        await miniprogram.remote();
+    }
 })
 
 afterAll(async () => {
@@ -116,7 +120,11 @@ describe("News page", () => {
         const tabs_selector = "view.van-tabs__nav.van-tabs__nav--line view.van-ellipsis.van-tab"
         const second_tab_elem = (await page.$$(tabs_selector))[1];
         await second_tab_elem.tap();
-        await page.waitFor(1500);
+        if (remote == true) {
+            await page.waitFor(5000);
+        } else {
+            await page.waitFor(1500);
+        }
         await expect_article_card_to_exist(page);
     })
 

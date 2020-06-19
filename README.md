@@ -1,8 +1,8 @@
+![GitHub contributors](https://img.shields.io/github/contributors/awesome-devops-hub/wxapp) ![node-current](https://img.shields.io/node/v/eslint-loader) ![Wechat Devtools](https://img.shields.io/badge/Wechat%20Devtools-%3E%3D1.02.1907232-green)
+
 # wxapp
 
-For Chinese README file, please refer to [README_CN.md](https://github.com/awesome-devops-hub/wxapp/blob/master/README_CN.md)
-
-中文README文档请见[README_CN.md](https://github.com/awesome-devops-hub/wxapp/blob/master/README_CN.md)
+For Chinese README file, please refer to [README_CN.md](https://github.com/awesome-devops-hub/wxapp/blob/master/README_CN.md) | 中文README文档请见[README_CN.md](https://github.com/awesome-devops-hub/wxapp/blob/master/README_CN.md)
 
 wxapp is an internal project for the purpose of WeChat mini-program capability building. The original idea was to build a mini-program which enables quick access to some of the company resources (policies, newsletters etc.) and notifications from Admin/HR to other staffs. 
 

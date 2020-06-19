@@ -1,3 +1,5 @@
+![GitHub contributors](https://img.shields.io/github/contributors/awesome-devops-hub/wxapp) ![node-current](https://img.shields.io/node/v/eslint-loader) ![Wechat Devtools](https://img.shields.io/badge/Wechat%20Devtools-%3E%3D1.02.1907232-green)
+
 # wxapp
 
 For English README file, please refer to [README.md](https://github.com/awesome-devops-hub/wxapp/blob/master/README.md)

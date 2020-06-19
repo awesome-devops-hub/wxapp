@@ -8,6 +8,7 @@ import {
   ISearchResultPb,
   ISearchResultRequest,
 } from "../../protocol/SearchProto";
+import { IPagingPb } from "../../protocol/ResourceProto";
 
 interface State {
   searchValue: string;
@@ -69,14 +70,14 @@ class SearchResultPage extends WxPage<State> {
     this.setData({ activeTab: event.detail.index });
   }
 
-  pageChange(event) {
+  pageChange(paging:IPagingPb) {
     wx.showToast({
       title: "加载中",
       icon: "loading",
       duration: 800,
     });
     this.getSearchResult({
-      pageable: { page: event.currentTarget.dataset.page.page + 1 },
+      pageable: { page: paging.page + 1 },
       module: this.data.dataResult[this.data.activeTab].module,
       key: this.data.searchValue,
     }).subscribe((res) => {

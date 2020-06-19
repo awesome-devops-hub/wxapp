@@ -6,7 +6,8 @@
         "van-tab": "/components/vant/tab/index",
         "van-tabs": "/components/vant/tabs/index",
         "van-tag": "/components/vant/tag/index",
-        "van-button": "/components/vant/button/index"
+        "van-button": "/components/vant/button/index",
+        "cust-list": "/components/utils/article-list/list"
     },
     "navigationBarTitleText": "搜索"
 }

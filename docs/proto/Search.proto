@@ -6,6 +6,7 @@ option java_package = "cool.qun.estate.backend.protocol.search";
 
 import "Resource.proto";
 import "WebpbOptions.proto";
+import "Article.proto";
 
 message SearchHistoryPb {
     repeated string entries = 1;
@@ -15,15 +16,9 @@ message HotSearchPb{
     repeated string entries = 1;
 }
 
-message articlePb{
-    required string id = 1;
-    required string title = 2;
-    required string category = 3;
-}
-
 message SearchResultPb{
     required string module =1;
-    repeated articlePb entries = 2;
+    repeated ArticleProto.articlePb entries = 2;
     required ResourceProto.PagingPb paging = 3;
 }
 
@@ -40,8 +35,8 @@ message SearchHistoryResponse {
 message SearchResultResponse{
     repeated SearchResultPb data= 1;
 }
-message TravelGuidesResponse{
-    repeated articlePb data = 1;
+message PolicyArticlesResponse{
+    repeated ArticleProto.articlePb data = 1;
     required ResourceProto.PagingPb paging = 2;
 }
 
@@ -66,10 +61,11 @@ message SearchResultRequest {
     optional string module = 3;
 }
 
-message TravelGuidesRequest {
+message PolicyArticlesRequest {
     option (method) = 'GET';
-    option (path) = '/api/search/travel/guides?page={pageable.page}&size={pageable.size}';
+    option (path) = '/api/search/policy?page={pageable.page}&size={pageable.size}&module={module}';
     required ResourceProto.PageablePb pageable = 1;
+    required string module = 2;
 }
 
 

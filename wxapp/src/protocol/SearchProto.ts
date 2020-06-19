@@ -5,6 +5,8 @@ import * as Webpb from 'webpb';
 
 import * as ResourceProto from './ResourceProto';
 
+import * as ArticleProto from './ArticleProto';
+
 export interface ISearchHistoryPb {
     entries: string[];
 }
@@ -49,41 +51,15 @@ export class HotSearchPb implements IHotSearchPb {
     }
 }
 
-export interface IarticlePb {
-    id: string;
-    title: string;
-    category: string;
-}
-
-export class articlePb implements IarticlePb {
-    id!: string;
-    title!: string;
-    category!: string;
-    META: () => Webpb.WebpbMeta;
-
-    private constructor(p?: IarticlePb) {
-        Webpb.assign(p, this, []);
-        this.META = () => (p && {
-            class: 'articlePb',
-            method: '',
-            path: ''
-        }) as Webpb.WebpbMeta;
-    }
-
-    static create(properties: IarticlePb): articlePb {
-        return new articlePb(properties);
-    }
-}
-
 export interface ISearchResultPb {
     module: string;
-    entries: IarticlePb[];
+    entries: ArticleProto.IarticlePb[];
     paging: ResourceProto.IPagingPb;
 }
 
 export class SearchResultPb implements ISearchResultPb {
     module!: string;
-    entries!: IarticlePb[];
+    entries!: ArticleProto.IarticlePb[];
     paging!: ResourceProto.IPagingPb;
     META: () => Webpb.WebpbMeta;
 
@@ -171,27 +147,27 @@ export class SearchResultResponse implements ISearchResultResponse {
     }
 }
 
-export interface ITravelGuidesResponse {
-    data: IarticlePb[];
+export interface IPolicyArticlesResponse {
+    data: ArticleProto.IarticlePb[];
     paging: ResourceProto.IPagingPb;
 }
 
-export class TravelGuidesResponse implements ITravelGuidesResponse {
-    data!: IarticlePb[];
+export class PolicyArticlesResponse implements IPolicyArticlesResponse {
+    data!: ArticleProto.IarticlePb[];
     paging!: ResourceProto.IPagingPb;
     META: () => Webpb.WebpbMeta;
 
-    private constructor(p?: ITravelGuidesResponse) {
+    private constructor(p?: IPolicyArticlesResponse) {
         Webpb.assign(p, this, []);
         this.META = () => (p && {
-            class: 'TravelGuidesResponse',
+            class: 'PolicyArticlesResponse',
             method: '',
             path: ''
         }) as Webpb.WebpbMeta;
     }
 
-    static create(properties: ITravelGuidesResponse): TravelGuidesResponse {
-        return new TravelGuidesResponse(properties);
+    static create(properties: IPolicyArticlesResponse): PolicyArticlesResponse {
+        return new PolicyArticlesResponse(properties);
     }
 }
 
@@ -276,27 +252,30 @@ export class SearchResultRequest implements ISearchResultRequest, Webpb.WebpbMes
     }
 }
 
-export interface ITravelGuidesRequest {
+export interface IPolicyArticlesRequest {
     pageable: ResourceProto.IPageablePb;
+    module: string;
 }
 
-export class TravelGuidesRequest implements ITravelGuidesRequest, Webpb.WebpbMessage {
+export class PolicyArticlesRequest implements IPolicyArticlesRequest, Webpb.WebpbMessage {
     pageable!: ResourceProto.IPageablePb;
+    module!: string;
     META: () => Webpb.WebpbMeta;
 
-    private constructor(p?: ITravelGuidesRequest) {
+    private constructor(p?: IPolicyArticlesRequest) {
         Webpb.assign(p, this, []);
         this.META = () => (p && {
-            class: 'TravelGuidesRequest',
+            class: 'PolicyArticlesRequest',
             method: 'GET',
-            path: `/api/search/travel/guides${Webpb.query({
+            path: `/api/search/policy${Webpb.query({
                 page: Webpb.getter(p, 'pageable.page'),
                 size: Webpb.getter(p, 'pageable.size'),
+                module: p.module,
             })}`
         }) as Webpb.WebpbMeta;
     }
 
-    static create(properties: ITravelGuidesRequest): TravelGuidesRequest {
-        return new TravelGuidesRequest(properties);
+    static create(properties: IPolicyArticlesRequest): PolicyArticlesRequest {
+        return new PolicyArticlesRequest(properties);
     }
 }

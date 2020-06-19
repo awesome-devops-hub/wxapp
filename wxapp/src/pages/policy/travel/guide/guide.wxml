@@ -1,24 +1,2 @@
-<view class="article-list">
-	<view
-	 wx:for="{{guides}}"
-	 wx:key="idx"
-	 wx:for-item="item"
-	 class="item"
-	>
-		<navigator class="lnk" url="/pages/webview/webview?url=https://wxapp.qun.cool/blog/blog-02.html" open-type="navigate">
-			{{item.title}}
-		</navigator>
-	</view>
-</view>
-<view class="article-pager">
-	<view
-	 wx:if="{{paging.page*paging.size<paging.totalCount}}"
-	 class="p-btn bubble"
-	 data-page="{{paging}}"
-	 bindtap="pageChange"
-	>
-		查看更多
-	</view>
-	<view wx:else class="p-btn">没有了</view>
-</view>
+<cust-list articles="{{guides}}" paging="{{paging}}" bind:action="pageChange" />
 

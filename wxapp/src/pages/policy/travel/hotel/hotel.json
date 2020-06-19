@@ -3,6 +3,6 @@
     "usingComponents": {
         "cust-list": "/components/utils/article-list/list"
     },
-    "navigationBarTitleText": "差旅指南",
+    "navigationBarTitleText": "协议酒店",
     "styleIsolation": "shared"
 }

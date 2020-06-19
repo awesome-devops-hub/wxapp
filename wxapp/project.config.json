@@ -73,8 +73,8 @@
 				},
 				{
 					"id": 2,
-					"name": "result",
-					"pathName": "pages/search-result/search-result",
+					"name": "travel guide",
+					"pathName": "pages/policy/travel/guide/guide",
 					"query": "",
 					"scene": null
 				}

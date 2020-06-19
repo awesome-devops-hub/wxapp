@@ -6,8 +6,8 @@ import {
   SearchHistoryResponse,
   SearchResultRequest,
   SearchResultResponse,
-  TravelGuidesRequest,
-  TravelGuidesResponse,
+  PolicyArticlesRequest,
+  PolicyArticlesResponse,
   ISearchResultPb,
 } from "../../protocol/SearchProto";
 
@@ -38,31 +38,49 @@ const articleEntriesMock = [
     title: "碎片化时代，找准你的增长飞轮",
     id: "1",
     category: "博客大赛",
+    coverImage: "",
+    author: "Some",
+    publishAt: "1天前",
   },
   {
     title: "Bug Report该怎么做",
     id: "2",
-    category: "博客大赛",
+    category: "Newsletter",
+    coverImage: "",
+    author: "Any",
+    publishAt: "3小时前",
   },
   {
     title: "你的能力和态度及格了吗",
     id: "3",
     category: "博客大赛",
+    coverImage: "http://img3.imgtn.bdimg.com/it/u=2774391408,3578926483&fm=214&gp=0.jpg",
+    author: "They",
+    publishAt: "30分钟前",
   },
   {
-    title: "5分钟让你学会高效组织结构-全功能团队，没学会请自己找原因！",
+    title: "5分钟让你学会高效组织结构-全功能团队，没学会请自己找原因！看一看标题可以有多长呢？测试下长标题样式效果",
     id: "4",
-    category: "博客大赛",
+    category: "政策",
+    coverImage: "http://img3.imgtn.bdimg.com/it/u=2774391408,3578926483&fm=214&gp=0.jpg",
+    author: "People",
+    publishAt: "5分钟前",
   },
   {
     title: "微信小程序技术原理与开发框架评析",
     id: "5",
     category: "博客大赛",
+    coverImage: "http://img3.imgtn.bdimg.com/it/u=2774391408,3578926483&fm=214&gp=0.jpg",
+    author: "Those",
+    publishAt: "刚刚",
   },
   {
     title: "如果你想转岗做BA",
     id: "6",
-    category: "博客大赛",
+    category: "政策",
+    coverImage: "",
+    author: "T.Will",
+    publishAt: "50分钟前",
   },
 ];
 
@@ -135,9 +153,9 @@ export const mockSearch: MockData[] = [
     delay: 500,
   },
   {
-    request: TravelGuidesRequest,
-    response: (req: TravelGuidesRequest) => {
-      return TravelGuidesResponse.create({
+    request: PolicyArticlesRequest,
+    response: (req: PolicyArticlesRequest) => {
+      return PolicyArticlesResponse.create({
         data: articleEntriesMock.slice(getRandomIntInclusive(0, 5)),
         paging: {
           page: req.pageable.page,

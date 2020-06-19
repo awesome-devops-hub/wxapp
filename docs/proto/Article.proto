@@ -1,0 +1,15 @@
+syntax = "proto2";
+
+package ArticleProto;
+
+option java_package = "cool.qun.estate.backend.protocol.article";
+
+
+message articlePb{
+    required string id = 1;
+    required string title = 2;
+    required string category = 3;
+    optional string coverImage = 4;
+    optional string publishAt = 5;
+    optional string author = 6;
+}

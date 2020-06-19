@@ -22,7 +22,9 @@
 				 wx:for-item="tab"
 				 title="{{tab.module}}"
 				>
-					<view class="result-box">
+				<cust-list articles="{{tab.entries}}" paging="{{tab.paging}}" bind:action="pageChange" />
+
+					<!-- <view class="result-box">
 						<view
 						 wx:for="{{tab.entries}}"
 						 wx:key="idx"
@@ -45,7 +47,7 @@
 							查看更多
 						</view>
 						<view wx:else class="p-btn">没有了</view>
-					</view>
+					</view> -->
 				</van-tab>
 			</van-tabs>
 		</view>

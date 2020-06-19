@@ -4,6 +4,7 @@
         "pages/search/search",
         "pages/search-result/search-result",
         "pages/policy/travel/guide/guide",
+        "pages/policy/travel/hotel/hotel",
         "pages/policy/policy",
         "pages/message/message",
         "pages/webview/webview"

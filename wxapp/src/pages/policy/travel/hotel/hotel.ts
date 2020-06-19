@@ -11,13 +11,13 @@ import {
 import { IarticlePb } from "../../../../protocol/ArticleProto";
 
 interface State {
-  guides: IarticlePb[];
+  hotelData: IarticlePb[];
   paging: IPagingPb;
 }
 
-class TravelGuidesPage extends WxPage<State> {
+class ContractHotelPage extends WxPage<State> {
   data = {
-    guides: [],
+    hotelData: [],
     paging: {
       page: 1,
       size: 5,
@@ -31,13 +31,16 @@ class TravelGuidesPage extends WxPage<State> {
   }
 
   initData() {
-    this.getTravelGuides({ pageable: { page: 1 }, module:"travelguides" }).subscribe((res) => {
-      this.setData({ guides: res.data });
+    this.getContractHotels({
+      pageable: { page: 1 },
+      module: "hotel",
+    }).subscribe((res) => {
+      this.setData({ hotelData: res.data });
       this.setData({ paging: res.paging });
     });
   }
 
-  getTravelGuides(
+  getContractHotels(
     req: IPolicyArticlesRequest
   ): Subscribable<PolicyArticlesResponse> {
     return httpService.request(PolicyArticlesRequest.create(req));
@@ -49,11 +52,12 @@ class TravelGuidesPage extends WxPage<State> {
       icon: "loading",
       duration: 800,
     });
-    this.getTravelGuides({
-      pageable: { page: paging.page + 1 },module:"travelguides"
+    this.getContractHotels({
+      pageable: { page: paging.page + 1 },
+      module: "hotel",
     }).subscribe((res) => {
       wx.hideToast();
-      let originalData = this.data.guides;
+      let originalData = this.data.hotelData;
       let originalPaging = this.data.paging;
       if (res.data.length > 0) {
         const merged = originalData.concat(res.data);
@@ -67,7 +71,7 @@ class TravelGuidesPage extends WxPage<State> {
           totalPage: 2,
         };
       }
-      this.setData({ guides: originalData });
+      this.setData({ hotelData: originalData });
       this.setData({ paging: originalPaging });
     });
   }
@@ -76,10 +80,10 @@ class TravelGuidesPage extends WxPage<State> {
       console.log(res.target);
     }
     return {
-      title: "Check Thoughtworks Travel Guides",
-      path: "/page/policy/travel/guide/guide",
+      title: "Check Thoughtworks Contract Hotels",
+      path: "/page/policy/travel/hotel/hotel",
     };
   }
 }
 
-pagify(new TravelGuidesPage());
+pagify(new ContractHotelPage());

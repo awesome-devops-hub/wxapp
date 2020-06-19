@@ -1,4 +1,4 @@
-![GitHub contributors](https://img.shields.io/github/contributors/awesome-devops-hub/wxapp) ![node-current](https://img.shields.io/node/v/eslint-loader) ![Wechat Devtools](https://img.shields.io/badge/Wechat%20Devtools-%3E%3D1.02.1907232-green)
+![node-current](https://img.shields.io/node/v/eslint-loader) ![Wechat Devtools](https://img.shields.io/badge/Wechat%20Devtools-%3E%3D1.02.1907232-green)
 
 # wxapp
 

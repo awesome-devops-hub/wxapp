@@ -6,7 +6,7 @@ option java_package = "cool.qun.estate.backend.protocol.search";
 
 import "Resource.proto";
 import "WebpbOptions.proto";
-import "Article.proto";
+import "ArticleEntry.proto";
 
 message SearchHistoryPb {
     repeated string entries = 1;
@@ -18,7 +18,7 @@ message HotSearchPb{
 
 message SearchResultPb{
     required string module =1;
-    repeated ArticleProto.articlePb entries = 2;
+    repeated ArticleEntryProto.articleEntryPb entries = 2;
     required ResourceProto.PagingPb paging = 3;
 }
 
@@ -36,7 +36,7 @@ message SearchResultResponse{
     repeated SearchResultPb data= 1;
 }
 message PolicyArticlesResponse{
-    repeated ArticleProto.articlePb data = 1;
+    repeated ArticleEntryProto.articleEntryPb data = 1;
     required ResourceProto.PagingPb paging = 2;
 }
 

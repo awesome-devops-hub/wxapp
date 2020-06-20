@@ -5,7 +5,7 @@ import * as Webpb from 'webpb';
 
 import * as ResourceProto from './ResourceProto';
 
-import * as ArticleProto from './ArticleProto';
+import * as ArticleEntryProto from './ArticleEntryProto';
 
 export interface ISearchHistoryPb {
     entries: string[];
@@ -53,13 +53,13 @@ export class HotSearchPb implements IHotSearchPb {
 
 export interface ISearchResultPb {
     module: string;
-    entries: ArticleProto.IarticlePb[];
+    entries: ArticleEntryProto.IarticleEntryPb[];
     paging: ResourceProto.IPagingPb;
 }
 
 export class SearchResultPb implements ISearchResultPb {
     module!: string;
-    entries!: ArticleProto.IarticlePb[];
+    entries!: ArticleEntryProto.IarticleEntryPb[];
     paging!: ResourceProto.IPagingPb;
     META: () => Webpb.WebpbMeta;
 
@@ -148,12 +148,12 @@ export class SearchResultResponse implements ISearchResultResponse {
 }
 
 export interface IPolicyArticlesResponse {
-    data: ArticleProto.IarticlePb[];
+    data: ArticleEntryProto.IarticleEntryPb[];
     paging: ResourceProto.IPagingPb;
 }
 
 export class PolicyArticlesResponse implements IPolicyArticlesResponse {
-    data!: ArticleProto.IarticlePb[];
+    data!: ArticleEntryProto.IarticleEntryPb[];
     paging!: ResourceProto.IPagingPb;
     META: () => Webpb.WebpbMeta;
 

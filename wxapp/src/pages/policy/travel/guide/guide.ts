@@ -8,10 +8,10 @@ import {
   IPolicyArticlesRequest,
   PolicyArticlesResponse,
 } from "../../../../protocol/SearchProto";
-import { IarticlePb } from "../../../../protocol/ArticleProto";
+import { IarticleEntryPb } from "../../../../protocol/ArticleEntryProto";
 
 interface State {
-  guides: IarticlePb[];
+  guides: IarticleEntryPb[];
   paging: IPagingPb;
 }
 
@@ -31,7 +31,10 @@ class TravelGuidesPage extends WxPage<State> {
   }
 
   initData() {
-    this.getTravelGuides({ pageable: { page: 1 }, module:"travelguides" }).subscribe((res) => {
+    this.getTravelGuides({
+      pageable: { page: 1 },
+      module: "travelguides",
+    }).subscribe((res) => {
       this.setData({ guides: res.data });
       this.setData({ paging: res.paging });
     });
@@ -43,14 +46,16 @@ class TravelGuidesPage extends WxPage<State> {
     return httpService.request(PolicyArticlesRequest.create(req));
   }
 
-  pageChange(paging: IPagingPb) {
+  pageChange(event) {
     wx.showToast({
       title: "加载中",
       icon: "loading",
       duration: 800,
     });
+    const paging: IPagingPb = event.detail.currentTarget.dataset.page;
     this.getTravelGuides({
-      pageable: { page: paging.page + 1 },module:"travelguides"
+      pageable: { page: paging.page + 1 },
+      module: "travelguides",
     }).subscribe((res) => {
       wx.hideToast();
       let originalData = this.data.guides;

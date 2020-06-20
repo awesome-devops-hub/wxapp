@@ -70,12 +70,13 @@ class SearchResultPage extends WxPage<State> {
     this.setData({ activeTab: event.detail.index });
   }
 
-  pageChange(paging:IPagingPb) {
+  pageChange(event) {
     wx.showToast({
       title: "加载中",
       icon: "loading",
       duration: 800,
     });
+    const paging: IPagingPb = event.detail.currentTarget.dataset.page;
     this.getSearchResult({
       pageable: { page: paging.page + 1 },
       module: this.data.dataResult[this.data.activeTab].module,

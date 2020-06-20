@@ -155,6 +155,8 @@ export const mockSearch: MockData[] = [
   {
     request: PolicyArticlesRequest,
     response: (req: PolicyArticlesRequest) => {
+      console.log("res composing",req);
+      
       return PolicyArticlesResponse.create({
         data: articleEntriesMock.slice(getRandomIntInclusive(0, 5)),
         paging: {

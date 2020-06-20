@@ -5,7 +5,7 @@
     placeholder="请输入搜索关键词"
     bindtap="onSearch"
   ></van-search>
-  <!-- <view wx:if="{{ !loading }}">
+  <view wx:if="{{ !loading }}">
     <van-tabs
       class="article-tabs"
       bind:change="onTabChange"
@@ -47,8 +47,8 @@
         </view>
       </van-tab>
     </van-tabs>
-  </view> -->
-  <view  class="skeleton-box">
+  </view>
+  <view wx:else class="skeleton-box">
     <van-skeleton class="skeleton" title row="10"/>
   </view>
 </view>

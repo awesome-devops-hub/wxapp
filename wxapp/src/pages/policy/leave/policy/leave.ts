@@ -11,13 +11,13 @@ import {
 import { IarticleEntryPb } from "../../../../protocol/ArticleEntryProto";
 
 interface State {
-  hotelData: IarticleEntryPb[];
+  leavePolicyData: IarticleEntryPb[];
   paging: IPagingPb;
 }
 
-class ContractHotelPage extends WxPage<State> {
+class LeavePolicyPage extends WxPage<State> {
   data = {
-    hotelData: [],
+    leavePolicyData: [],
     paging: {
       page: 1,
       size: 5,
@@ -31,16 +31,16 @@ class ContractHotelPage extends WxPage<State> {
   }
 
   initData() {
-    this.getContractHotels({
+    this.getLeavePolicy({
       pageable: { page: 1 },
-      module: "hotel",
+      module: "leavepolicy",
     }).subscribe((res) => {
-      this.setData({ hotelData: res.data });
+      this.setData({ leavePolicyData: res.data });
       this.setData({ paging: res.paging });
     });
   }
 
-  getContractHotels(
+  getLeavePolicy(
     req: IPolicyArticlesRequest
   ): Subscribable<PolicyArticlesResponse> {
     return httpService.request(PolicyArticlesRequest.create(req));
@@ -53,12 +53,12 @@ class ContractHotelPage extends WxPage<State> {
       duration: 800,
     });
     const paging: IPagingPb = event.detail.currentTarget.dataset.page;
-    this.getContractHotels({
+    this.getLeavePolicy({
       pageable: { page: paging.page + 1 },
-      module: "hotel",
+      module: "leavepolicy",
     }).subscribe((res) => {
       wx.hideToast();
-      let originalData = this.data.hotelData;
+      let originalData = this.data.leavePolicyData;
       let originalPaging = this.data.paging;
       if (res.data.length > 0) {
         const merged = originalData.concat(res.data);
@@ -72,7 +72,7 @@ class ContractHotelPage extends WxPage<State> {
           totalPage: 2,
         };
       }
-      this.setData({ hotelData: originalData });
+      this.setData({ leavePolicyData: originalData });
       this.setData({ paging: originalPaging });
     });
   }
@@ -81,10 +81,10 @@ class ContractHotelPage extends WxPage<State> {
       console.log(res.target);
     }
     return {
-      title: "Check Thoughtworks Contract Hotels",
-      path: "/page/policy/travel/hotel/hotel",
+      title: "Check Thoughtworks Leave Policy",
+      path: "pages/policy/leave/policy/leave",
     };
   }
 }
 
-pagify(new ContractHotelPage());
+pagify(new LeavePolicyPage());

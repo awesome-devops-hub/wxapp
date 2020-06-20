@@ -1,0 +1,2 @@
+<cust-list articles="{{housingFundData}}" paging="{{paging}}" bind:action="pageChange" />
+

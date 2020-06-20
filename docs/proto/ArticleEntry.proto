@@ -1,11 +1,11 @@
 syntax = "proto2";
 
-package ArticleProto;
+package ArticleEntryProto;
 
-option java_package = "cool.qun.estate.backend.protocol.article";
+option java_package = "cool.qun.estate.backend.protocol.articleEntry";
 
 
-message articlePb{
+message articleEntryPb{
     required string id = 1;
     required string title = 2;
     required string category = 3;

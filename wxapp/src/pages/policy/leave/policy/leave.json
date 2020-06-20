@@ -1,0 +1,8 @@
+{
+    "enablePullDownRefresh": false,
+    "usingComponents": {
+        "cust-list": "/components/utils/article-list/list"
+    },
+    "navigationBarTitleText": "假期政策",
+    "styleIsolation": "shared"
+}

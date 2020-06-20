@@ -11,13 +11,13 @@ import {
 import { IarticleEntryPb } from "../../../../protocol/ArticleEntryProto";
 
 interface State {
-  hotelData: IarticleEntryPb[];
+  computerGuidelines: IarticleEntryPb[];
   paging: IPagingPb;
 }
 
-class ContractHotelPage extends WxPage<State> {
+class ComputerGuidelinePage extends WxPage<State> {
   data = {
-    hotelData: [],
+    computerGuidelines: [],
     paging: {
       page: 1,
       size: 5,
@@ -31,16 +31,16 @@ class ContractHotelPage extends WxPage<State> {
   }
 
   initData() {
-    this.getContractHotels({
+    this.getGuidelines({
       pageable: { page: 1 },
-      module: "hotel",
+      module: "computer",
     }).subscribe((res) => {
-      this.setData({ hotelData: res.data });
+      this.setData({ computerGuidelines: res.data });
       this.setData({ paging: res.paging });
     });
   }
 
-  getContractHotels(
+  getGuidelines(
     req: IPolicyArticlesRequest
   ): Subscribable<PolicyArticlesResponse> {
     return httpService.request(PolicyArticlesRequest.create(req));
@@ -53,12 +53,12 @@ class ContractHotelPage extends WxPage<State> {
       duration: 800,
     });
     const paging: IPagingPb = event.detail.currentTarget.dataset.page;
-    this.getContractHotels({
+    this.getGuidelines({
       pageable: { page: paging.page + 1 },
-      module: "hotel",
+      module: "computer",
     }).subscribe((res) => {
       wx.hideToast();
-      let originalData = this.data.hotelData;
+      let originalData = this.data.computerGuidelines;
       let originalPaging = this.data.paging;
       if (res.data.length > 0) {
         const merged = originalData.concat(res.data);
@@ -72,7 +72,7 @@ class ContractHotelPage extends WxPage<State> {
           totalPage: 2,
         };
       }
-      this.setData({ hotelData: originalData });
+      this.setData({ computerGuidelines: originalData });
       this.setData({ paging: originalPaging });
     });
   }
@@ -81,10 +81,10 @@ class ContractHotelPage extends WxPage<State> {
       console.log(res.target);
     }
     return {
-      title: "Check Thoughtworks Contract Hotels",
-      path: "/page/policy/travel/hotel/hotel",
+      title: "Check Thoughtworks Computer Guidelines",
+      path: "/page/policy/others/computer/guidelines",
     };
   }
 }
 
-pagify(new ContractHotelPage());
+pagify(new ComputerGuidelinePage());

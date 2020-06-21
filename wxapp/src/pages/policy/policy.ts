@@ -8,6 +8,7 @@ import {
   AnnualLeaveInfoResponse,
   IAnnualLeavePb,
 } from "../../protocol/LeaveProto";
+import { RxWx } from '../../core/utils/RxWx';
 
 interface State {
   annualLeaveDialogue: boolean;
@@ -105,6 +106,20 @@ class PolicyPage extends WxPage<State> {
     req: IAnnualLeaveInfoRequest
   ): Subscribable<AnnualLeaveInfoResponse> {
     return httpService.request(AnnualLeaveInfoRequest.create(req));
+  }
+
+  tapReimburse() {
+    RxWx.navigateTo("/pages/towxml/towxml", {
+        url: 'https://wxapp.qun.cool/blog/blog-02.html',
+        baseUrl: 'https://wxapp.qun.cool/blog/'
+    }).subscribe();
+  }
+
+  tapInvoice() {
+      RxWx.navigateTo("/pages/towxml/towxml", {
+          url: 'https://wxapp.qun.cool/blog/blog-03.html',
+          baseUrl: 'https://wxapp.qun.cool/blog/'
+      }).subscribe();
   }
 }
 

@@ -1,0 +1,7 @@
+{
+    "enablePullDownRefresh": false,
+    "usingComponents": {
+        "towxml": "/components/towxml/towxml"
+    },
+    "navigationBarTitleText": "搜索"
+}

@@ -3,6 +3,5 @@
     "usingComponents": {
         "cust-list": "/components/utils/article-list/list"
     },
-    "navigationBarTitleText": "住房公积金",
-    "styleIsolation": "shared"
+    "navigationBarTitleText": "住房公积金"
 }

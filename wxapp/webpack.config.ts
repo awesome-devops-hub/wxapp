@@ -4,6 +4,7 @@ import TerserPlugin = require('terser-webpack-plugin');
 import OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 import MiniCssExtractPlugin = require('mini-css-extract-plugin');
 import FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
+import CopyPlugin = require('copy-webpack-plugin');
 
 import { resolve, } from 'path';
 import { EntryResolver } from './webpack/Webpack';
@@ -161,6 +162,14 @@ export default (env: string) => {
                     `require('./scripts');` +
                     `} catch (e) {}`,
                 include: 'app.js',
+            }),
+            new CopyPlugin({
+                patterns: [
+                    { from: 'components/towxml', to: 'components/towxml', context: srcDir }
+                ],
+                options: {
+                    concurrency: 100,
+                },
             })
         ],
         optimization: {

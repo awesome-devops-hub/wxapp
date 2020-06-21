@@ -1,14 +1,14 @@
 <view class="policy">
 	<view class="section-header">财务</view>
 	<van-grid column-num="2" gutter="{{ 1 }}">
-		<van-grid-item use-slot>
+		<van-grid-item use-slot catchtap="tapReimburse">
 			<view class="cust-grid-item">
 				<i class="fa fa-money icon" style="color:#DB443A" aria-hidden="true" />
 				<text class="icon-alt">报销政策</text>
 			</view>
 		</van-grid-item>
 		<van-grid-item use-slot>
-			<view class="cust-grid-item">
+			<view class="cust-grid-item" catchtap="tapInvoice">
 				<i class="fa fa-info-circle icon" style="color:#EA575A" aria-hidden="true" />
 				<text class="icon-alt">发票信息</text>
 			</view>

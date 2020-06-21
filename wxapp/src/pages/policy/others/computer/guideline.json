@@ -3,6 +3,5 @@
     "usingComponents": {
         "cust-list": "/components/utils/article-list/list"
     },
-    "navigationBarTitleText": "电脑政策",
-    "styleIsolation": "shared"
+    "navigationBarTitleText": "电脑政策"
 }

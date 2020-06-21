@@ -29,6 +29,9 @@ export class EntryResolver {
             const data = existsSync(file) ? require(file) : {};
             if (data.usingComponents) {
                 Object.values(data.usingComponents).forEach((e: any) => {
+                    if (e.indexOf("towxml") >= 0) {
+                        return;
+                    }
                     let nextEntry: string;
                     if (startsWith(e, '/components')) {
                         nextEntry = relative(this.srcDir, resolve(this.srcDir, '.' + e));

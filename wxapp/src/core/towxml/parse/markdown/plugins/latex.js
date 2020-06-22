@@ -1,4 +1,4 @@
-const config = require('../../../config');
+const config = require('../../../../../components/towxml/config');
 
 // Test if potential opening or closing delimieter
 // Assumes that there is a "$" at state.src[pos]

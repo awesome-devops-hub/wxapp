@@ -10,7 +10,8 @@
         "pages/policy/others/computer/guideline",
         "pages/policy/policy",
         "pages/message/message",
-        "pages/webview/webview"
+        "pages/webview/webview",
+        "pages/towxml/towxml"
     ],
     "window": {
         "backgroundTextStyle": "dark",

@@ -5,6 +5,5 @@
         "van-grid-item": "/components/vant/grid-item/index",
         "van-popup": "/components/vant/popup/index"
     },
-    "navigationBarTitleText": "政策",
-    "styleIsolation": "shared"
+    "navigationBarTitleText": "政策"
 }

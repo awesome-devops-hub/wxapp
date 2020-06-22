@@ -3,6 +3,5 @@
     "usingComponents": {
         "cust-list": "/components/utils/article-list/list"
     },
-    "navigationBarTitleText": "差旅指南",
-    "styleIsolation": "shared"
+    "navigationBarTitleText": "差旅指南"
 }

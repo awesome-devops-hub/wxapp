@@ -9,15 +9,15 @@ jest.setTimeout(60000);
 beforeAll(async () => {
     miniprogram = await automator.launch({
       projectPath: "../wxapp"
-    })
+    });
     if(remote == true) {
         await miniprogram.remote();
     }
-})
+});
 
 afterAll(async () => {
     await miniprogram.close();
-})
+});
 
 
 /* 
@@ -32,7 +32,7 @@ describe("search page", () => {
         await (await page.$("input.van-field__input")).tap();
         await page.waitFor(1000);
         search_page = await miniprogram.currentPage();
-    })
+    });
     
 
     it("Hot search entries should contain Buddy Program", async () => {
@@ -42,7 +42,7 @@ describe("search page", () => {
             () => expect(elem_wxml).toContain("Buddy Program"),
             () => expect(elem_wxml).toContain("暂无")
         );
-    })
+    });
 
     it("Search history should contain Buddy Program", async () => {
         const hot_search_tags_div_elem = (await search_page.$$("div.search-tag"))[1];
@@ -51,8 +51,8 @@ describe("search page", () => {
             () => expect(elem_wxml).toContain("Buddy Program"),
             () => expect(elem_wxml).toContain("暂无")
         );
-    })
-})
+    });
+});
 
 
 /*
@@ -67,7 +67,7 @@ describe("search result page", () => {
         await (await page.$("input.van-field__input")).tap();
         await page.waitFor(1000);
         search_page = await miniprogram.currentPage();
-    }, 30000)
+    }, 30000);
     
 
     it("Should see search result page when searching a keyword", async () => {
@@ -81,14 +81,14 @@ describe("search result page", () => {
                 () => expect(search_result_wxml).toContain("News"),
                 () => expect(search_result_wxml).toContain("Policy"),
                 () => expect(search_result_wxml).toContain("暂无相关结果")
-            )
+            );
         }
         catch(e) {
             const empty_search_result_elem = await search_result_page.$("view.no-result");
             expect(empty_search_result_elem).toBeTruthy();
         }
-    })
-})
+    });
+});
 
 
 /*
@@ -101,7 +101,7 @@ describe("News page", () => {
     beforeAll(async () => {
         page = await miniprogram.reLaunch("/pages/index/index");
         await page.waitFor(500);
-    }, 30000)
+    }, 30000);
 
     it("4 Tabs should present", async () => {
         const navigator_bar = await page.$("view.van-tabs__nav.van-tabs__nav--line");
@@ -110,14 +110,14 @@ describe("News page", () => {
         expect(nav_bar_text).toContain("活动");
         expect(nav_bar_text).toContain("博客大赛");
         expect(nav_bar_text).toContain("Admin");
-    })
+    });
 
     it("The first tab should contain article card", async() => {
         await expect_article_card_to_exist(page);
-    })
+    });
 
     it("The second tab should contain article card", async() => {
-        const tabs_selector = "view.van-tabs__nav.van-tabs__nav--line view.van-ellipsis.van-tab"
+        const tabs_selector = "view.van-tabs__nav.van-tabs__nav--line view.van-ellipsis.van-tab";
         const second_tab_elem = (await page.$$(tabs_selector))[1];
         await second_tab_elem.tap();
         if (remote == true) {
@@ -126,11 +126,11 @@ describe("News page", () => {
             await page.waitFor(1500);
         }
         await expect_article_card_to_exist(page);
-    })
+    });
 
     async function expect_article_card_to_exist(page) {
         const content_container = await page.$("van-tab.article-tab");
         const content_container_wxml = await content_container.outerWxml();
         expect(content_container_wxml).toContain("<article-card ");
     }
-})
+});

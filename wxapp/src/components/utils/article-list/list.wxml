@@ -1,10 +1,10 @@
 <view class="item-list">
 	<block wx:for="{{articles}}" wx:key="idx" wx:for-item="item">
-		<view wx:if="{{item.coverImage.length > 0}}" class="item img-item">
+		<view wx:if="{{item.coverImage.length > 0}}" class="item img-item" bind:tap="openArticle">
 			<view class="title">
-				<navigator class="lnk" url="/pages/webview/webview?url=https://wxapp.qun.cool/blog/blog-02.html" open-type="navigate">
+				<view class="lnk">
 					{{item.title}}
-				</navigator>
+				</view>
 				<view class="item-foot">
 					<view class="item-tag">{{item.category}}</view>
 					<view>{{item.publishAt}}</view>
@@ -16,10 +16,10 @@
 
 		</view>
 
-		<view wx:else class="item">
-			<navigator class="lnk" url="/pages/webview/webview?url=https://wxapp.qun.cool/blog/blog-02.html" open-type="navigate">
+		<view wx:else class="item" bind:tap="openArticle">
+			<view class="lnk">
 				{{item.title}}
-			</navigator>
+			</view>
 			<view class="item-foot">
 				<view class="item-tag">{{item.category}}</view>
 				<view>{{item.publishAt}}</view>
@@ -29,7 +29,7 @@
 </view>
 
 <view class="init-spinner" wx:if="{{articles.length == 0}}">
-    <van-loading color="#4CA663" />
+	<van-loading color="#4CA663" />
 </view>
 <view wx:else class="item-pager">
 	<view

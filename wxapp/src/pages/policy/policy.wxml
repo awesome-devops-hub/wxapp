@@ -109,7 +109,7 @@
  show="{{ annualLeaveDialogue }}"
  closeable
  bind:close="onDialogueClose"
- custom-style="height: 20%;width:80%;padding: 2rem;"
+ custom-style="width:80%;padding:2.5rem 1rem 1rem 1rem;font-size:28rpx;"
 >
 	<view>截止{{dateInfo}}，您已休{{leaveInfo.taken}}天年假，剩余{{leaveInfo.balanceToDate}}天年假</view>
 	<view>截止{{dateYear}}年12月31日剩余{{leaveInfo.balanceToYearEnd}}天年假</view>

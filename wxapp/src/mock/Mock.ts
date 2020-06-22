@@ -7,6 +7,7 @@ import { mockUser } from './modules/MockUser';
 import { mockSearch } from "./modules/MockSearch";
 import { mockArticle } from "./modules/MockArticle";
 import { mockLeave } from './modules/MockLeave';
+import { mockMessage } from "./modules/MockMessage";
 
 export interface MockData {
     request: { prototype: WebpbMessage },
@@ -14,7 +15,7 @@ export interface MockData {
     delay?: number
 }
 
-const mockList: MockData[] = [...mockUser, ...mockSearch,...mockArticle,...mockLeave];
+const mockList: MockData[] = [...mockUser, ...mockSearch,...mockArticle,...mockLeave, ...mockMessage];
 
 httpService.wxRequest = (option: RequestOption): RequestTask => {
     const message: WebpbMessage = option['__message'];
@@ -22,7 +23,7 @@ httpService.wxRequest = (option: RequestOption): RequestTask => {
         const prototype = Object.getPrototypeOf(message);
         return data.request === prototype.constructor;
     });
-    if (option.success) {  
+    if (option.success) {
         const response = {
             statusCode: 200,
             data: data.response(message)

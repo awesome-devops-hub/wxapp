@@ -20,8 +20,8 @@ const fileLoader = (ext = '[ext]', esModule = false) => {
             name: `[path][name].${ext}`,
             context: srcDir
         }
-    }
-}
+    };
+};
 
 const dumpLoader = (output?: string) => {
     return {
@@ -31,8 +31,8 @@ const dumpLoader = (output?: string) => {
             context: srcDir,
             output: output
         }
-    }
-}
+    };
+};
 
 export default (env: string) => {
     const isDev = env !== 'prod';
@@ -219,4 +219,4 @@ export default (env: string) => {
         },
         stats: 'minimal'
     };
-}
+};

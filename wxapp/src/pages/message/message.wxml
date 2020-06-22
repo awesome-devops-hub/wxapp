@@ -1,3 +1,20 @@
-<view>
-  <view>message page</view>
+<view class="page">
+  <scroll-view
+    class="scroll-box"
+    scroll-y
+    refresher-enabled
+    bindscrolltolower="onReachEnd"
+  >
+    <message-card
+      wx:for="{{ messages }}"
+      wx:for-item="message"
+      wx:key="id"
+      bind:read="onRead"
+      id="{{message.id}}"
+      title="{{message.title}}"
+      summary="{{message.summary}}"
+      date="{{message.date}}"
+      unread="{{message.unread}}"
+    ></message-card>
+  </scroll-view>
 </view>

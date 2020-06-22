@@ -1,6 +1,7 @@
 Component({
   data: {
     active: null,
+    messageCount: null,
     list: [{
       path: '/pages/index/index',
       icon: 'newspaper-o',
@@ -20,12 +21,6 @@ Component({
       wx.switchTab({
         url: this.data.list[event.detail]?.path
       });
-    },
-  },
-  pageLifetimes: {
-    show: function () {
-      console.log('attached');
-      console.log(this.getTabBar());
     },
   },
 });

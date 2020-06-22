@@ -1,6 +1,7 @@
 {
   "enablePullDownRefresh": false,
   "usingComponents": {
+    "message-card": "/components/utils/message-card/index",
     "van-field": "/components/vant/field/index",
     "cell-group": "/components/vant/cell-group/index",
     "van-tag": "/components/vant/tag/index",

@@ -1,0 +1,25 @@
+syntax = "proto2";
+
+package MessageProto;
+
+option java_package = "cool.qun.estate.backend.protocol.message";
+
+import "Resource.proto";
+
+message MessagePb {
+  required string id = 1;
+  required string title = 2;
+  required string summary = 3;
+  optional bool unread = 4;
+}
+
+message MessageRequest {
+  option (method) = 'GET';
+  option (path) = '/api/messages?page={pageable.page}&size={pageable.size}';
+  required ResourceProto.PageablePb pageable = 1 [(omitted) = true];
+}
+
+message MessageResponse {
+  repeated MessagePb data = 1;
+  required ResourceProto.PagingPb paging = 2;
+}

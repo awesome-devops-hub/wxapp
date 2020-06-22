@@ -1,7 +1,7 @@
 let hljs;
-hljs = require('../highlight/index');
+hljs = require('../highlight');
 
-const config = require('../../config'),
+const config = require('../../../../components/towxml/config'),
     mdOption = (() => {
         let result = {
             html: true,

@@ -1,7 +1,7 @@
 import { WxPage } from "../../core/wx/WxPage";
 import { pagify } from "../../core/utils/Utils";
 import IShareAppMessageOption = WechatMiniprogram.Page.IShareAppMessageOption;
-import towxml = require('../../components/towxml/index');
+import towxml = require('../../core/towxml/index');
 
 interface State {
     url: string;

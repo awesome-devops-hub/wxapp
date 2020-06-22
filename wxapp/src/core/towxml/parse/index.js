@@ -1,6 +1,6 @@
-const parse2 = require('./parse2/index'),
+const parse2 = require('./parse2'),
     // parse5 = require('./parse5/index').parse,
-    config = require('../config'),
+    config = require('../../../components/towxml/config'),
 
     // html与wxml转换关系
     correspondTag = (() => {

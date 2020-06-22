@@ -1,5 +1,5 @@
-const md = require('./parse/markdown/index'),
-    parse = require('./parse/index');
+const md = require('./parse/markdown'),
+    parse = require('./parse');
 
 module.exports = (str, type, option) => {
     option = option || {};

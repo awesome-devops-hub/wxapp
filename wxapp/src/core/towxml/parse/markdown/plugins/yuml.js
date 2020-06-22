@@ -1,4 +1,4 @@
-const config = require('../../../config');
+const config = require('../../../../../components/towxml/config');
 const mermaidChart = (code) => {
     return `<yuml value="${encodeURIComponent(code)}"></yuml>`;
 };

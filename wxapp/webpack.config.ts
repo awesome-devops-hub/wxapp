@@ -165,7 +165,8 @@ export default (env: string) => {
             }),
             new CopyPlugin({
                 patterns: [
-                    { from: 'components/towxml', to: 'components/towxml', context: srcDir }
+                    { from: 'components/towxml', to: 'components/towxml', context: srcDir },
+                    { from: 'assets/images/empty.png', to: 'assets/images/empty.png', context: srcDir }
                 ],
                 options: {
                     concurrency: 100,

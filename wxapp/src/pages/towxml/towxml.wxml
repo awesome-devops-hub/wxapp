@@ -1,1 +1,6 @@
-<towxml nodes="{{article}}"/>
+<view>
+    <button class="share-btn" open-type="share">
+        <view class="fa fa-share-alt"></view>
+    </button>
+    <towxml nodes="{{article}}"/>
+</view>

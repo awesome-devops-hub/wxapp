@@ -5,6 +5,7 @@ import towxml = require('../../components/towxml/index');
 
 interface State {
     url: string;
+    baseUrl: string;
     article: object;
 }
 
@@ -12,6 +13,7 @@ class WebviewPage extends WxPage<State> {
 
     data = {
         url: '',
+        baseUrl: '',
         article: {}
     };
 
@@ -29,6 +31,7 @@ class WebviewPage extends WxPage<State> {
                 wx.hideLoading();
                 this.setData({
                     url: url,
+                    baseUrl: baseUrl,
                     article: obj,
                     isLoading: false
                 });
@@ -38,9 +41,10 @@ class WebviewPage extends WxPage<State> {
     }
 
     onShareAppMessage(_res: IShareAppMessageOption) {
+        const { url, baseUrl } = this.data;
         return {
-            title: "Share from webview page",
-            path: `/page/webview/webview?url=${this.data.url}`,
+            title: "Share from towxml page",
+            path: `/pages/towxml/towxml?url=${url}&baseUrl=${baseUrl}`,
         };
     }
 }

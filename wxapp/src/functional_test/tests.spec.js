@@ -91,6 +91,33 @@ describe("search result page", () => {
 
 
 /*
+  Story: #12 文章详情页面
+*/
+describe("Article details page", () => {
+
+    let page;
+
+    beforeAll(async () => {
+        page = await miniprogram.reLaunch("/pages/search-result/search-result?key=Insurance");
+        await page.waitFor(500);
+        while (await check_if_result_page_is_empty(page) == true) {
+            page = await miniprogram.reLaunch("/pages/search-result/search-result?key=Insurance");
+            await page.waitFor(500);
+        }
+    }, 30000);
+
+    it("Detail page will be opened in a webview page", async () => {
+        const first_item = (await page.$$("view.list--item-list view.list--item navigator.list--lnk"))[0];
+        await first_item.tap();
+        await page.waitFor(1000);
+        const webview_page = await miniprogram.currentPage();
+        const webview_elem = await webview_page.$("web-view");
+        expect(webview_elem).toBeTruthy();
+    });
+});
+
+
+/*
   Story: #15 新闻页面各模块文章list页面
 */
 describe("News page", () => {

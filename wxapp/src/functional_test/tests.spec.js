@@ -1,8 +1,9 @@
 const automator = require("miniprogram-automator");
 const expect_or = require("./helpers/expect_or.js");
+const check_if_result_page_is_empty = require("./helpers/check_if_result_page_is_empty.js")
 
 let miniprogram;
-const remote = true;
+const remote = false;
 
 jest.setTimeout(60000);
 
@@ -79,13 +80,11 @@ describe("search result page", () => {
             const search_result_wxml = await(await search_result_page.$("van-tabs")).outerWxml();
             expect_or(
                 () => expect(search_result_wxml).toContain("News"),
-                () => expect(search_result_wxml).toContain("Policy"),
-                () => expect(search_result_wxml).toContain("暂无相关结果")
+                () => expect(search_result_wxml).toContain("Policy")
             );
         }
         catch(e) {
-            const empty_search_result_elem = await search_result_page.$("view.no-result");
-            expect(empty_search_result_elem).toBeTruthy();
+            expect(await check_if_result_page_is_empty(search_result_page)).toBe(true);
         }
     });
 });

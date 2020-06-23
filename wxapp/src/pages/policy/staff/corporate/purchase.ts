@@ -81,8 +81,8 @@ class CorporatePurchasePage extends WxPage<State> {
       console.log(res.target);
     }
     return {
-      title: "Check Thoughtworks Staff Housing Fund",
-      path: "/page/policy/staff/housing-fund/housing",
+      title: "Check Thoughtworks Corporate Purchasement",
+      path: "/page/policy/staff/corporate/purchase",
     };
   }
 }

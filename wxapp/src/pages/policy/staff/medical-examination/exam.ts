@@ -81,8 +81,8 @@ class MedicalExaminationPage extends WxPage<State> {
       console.log(res.target);
     }
     return {
-      title: "Check Thoughtworks Staff Housing Fund",
-      path: "/page/policy/staff/housing-fund/housing",
+      title: "Check Thoughtworks Staff Medical Examination,
+      path: "/page/policy/staff/medical-examination/exam",
     };
   }
 }

@@ -1,0 +1,2 @@
+<cust-list articles="{{corporatePurchaseData}}" paging="{{paging}}" bind:action="pageChange" />
+

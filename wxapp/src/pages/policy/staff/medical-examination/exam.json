@@ -1,0 +1,7 @@
+{
+    "enablePullDownRefresh": false,
+    "usingComponents": {
+        "cust-list": "/components/utils/article-list/list"
+    },
+    "navigationBarTitleText": "体检"
+}

@@ -1,0 +1,2 @@
+<cust-list articles="{{medicalExaminationData}}" paging="{{paging}}" bind:action="pageChange" />
+

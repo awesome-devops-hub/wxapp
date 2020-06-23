@@ -6,6 +6,8 @@
         "pages/policy/travel/guide/guide",
         "pages/policy/travel/hotel/hotel",
         "pages/policy/staff/housing-fund/housing",
+        "pages/policy/staff/medical-examination/exam",
+        "pages/policy/staff/corporate/purchase",
         "pages/policy/leave/policy/leave",
         "pages/policy/others/computer/guideline",
         "pages/policy/policy",

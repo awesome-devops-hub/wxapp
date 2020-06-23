@@ -81,7 +81,7 @@ class MedicalExaminationPage extends WxPage<State> {
       console.log(res.target);
     }
     return {
-      title: "Check Thoughtworks Staff Medical Examination,
+      title: "Check Thoughtworks Staff Medical Examination",
       path: "/page/policy/staff/medical-examination/exam",
     };
   }

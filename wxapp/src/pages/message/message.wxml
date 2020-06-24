@@ -3,6 +3,8 @@
     class="scroll-box"
     scroll-y
     refresher-enabled
+    refresher-triggered="{{triggered}}"
+    bindrefresherrefresh="onRefresh"
     bindscrolltolower="onReachEnd"
   >
     <message-card
@@ -16,5 +18,15 @@
       date="{{message.date}}"
       unread="{{message.unread}}"
     ></message-card>
+    <view wx:if="{{!loading}}" class="pager">
+      <block wx:if="{{!loadingMore}}">
+        <view wx:if="{{messages.length < paging.totalCount}}" class="text-box">下拉加载更多</view>
+        <view wx:else class="text-box">无更多内容</view>
+      </block>
+      <van-loading wx:else size="24px">加载中...</van-loading>
+    </view>
+    <view wx:else class="skeleton-box">
+      <van-skeleton row="10"/>
+    </view>
   </scroll-view>
 </view>

@@ -15,3 +15,22 @@
     //overflow-y: auto;
   }
 }
+
+.skeleton-box {
+  flex-grow: 1;
+  background-color: #fff;
+  padding: 20px 0;
+  .skeleton {
+    margin-bottom: 20px;
+  }
+}
+
+.pager {
+  padding: 20px;
+  text-align: center;
+  .text-box {
+    color: var(--loading-text-color, #969799);
+    font-size: var(--loading-text-font-size, 14px);
+    line-height: var(--loading-text-line-height, 20px);
+  }
+}

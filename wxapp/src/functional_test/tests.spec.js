@@ -91,9 +91,9 @@ describe("search result page", () => {
 
 
 /*
-  Story: #12 文章详情页面
+  [1] Story: #12 文章详情页面
 */
-describe("Article details page", () => {
+describe("Article details page in webview", () => {
 
     let page;
 
@@ -114,6 +114,35 @@ describe("Article details page", () => {
         const webview_elem = await webview_page.$("web-view");
         expect(webview_elem).toBeTruthy();
     });
+});
+
+/*
+  [2] Story: #12 文章详情页面
+*/
+describe("Article details page in towxml", () => {
+
+    let page;
+    let detail_page;
+
+    beforeAll(async () => {
+        page = await miniprogram.reLaunch("/pages/policy/policy");
+        await page.waitFor(500);
+        const first_grid = (await page.$$("view.van-grid-item__content"))[0];
+        await first_grid.tap();
+        await page.waitFor(1000);
+        detail_page = await miniprogram.currentPage();
+    }, 30000);
+
+    it("Detail page will be opened in a towxml component", async () => {
+        const towxml_elem = await detail_page.$("towxml");
+        expect(towxml_elem).toBeTruthy();
+    });
+
+    it("Detail page should contain a share button", async () => {
+        const towxml_elem = await detail_page.$("button.share-btn");
+        expect(towxml_elem).toBeTruthy();
+    })
+
 });
 
 

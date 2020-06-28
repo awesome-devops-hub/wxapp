@@ -12,6 +12,7 @@
         "pages/policy/others/computer/guideline",
         "pages/policy/policy",
         "pages/message/message",
+        "pages/message/detail/detail",
         "pages/webview/webview",
         "pages/towxml/towxml"
     ],

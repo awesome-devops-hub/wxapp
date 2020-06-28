@@ -9,6 +9,8 @@ export interface IMessagePb {
     id: string;
     title: string;
     summary: string;
+    category: string;
+    link?: string;
     unread?: boolean;
 }
 
@@ -16,6 +18,8 @@ export class MessagePb implements IMessagePb {
     id!: string;
     title!: string;
     summary!: string;
+    category!: string;
+    link?: string;
     unread?: boolean;
     META: () => Webpb.WebpbMeta;
 
@@ -30,6 +34,32 @@ export class MessagePb implements IMessagePb {
 
     static create(properties: IMessagePb): MessagePb {
         return new MessagePb(properties);
+    }
+}
+
+export interface IMessageDetailPb {
+    id: string;
+    title: string;
+    content: string;
+}
+
+export class MessageDetailPb implements IMessageDetailPb {
+    id!: string;
+    title!: string;
+    content!: string;
+    META: () => Webpb.WebpbMeta;
+
+    private constructor(p?: IMessageDetailPb) {
+        Webpb.assign(p, this, []);
+        this.META = () => (p && {
+            class: 'MessageDetailPb',
+            method: '',
+            path: ''
+        }) as Webpb.WebpbMeta;
+    }
+
+    static create(properties: IMessageDetailPb): MessageDetailPb {
+        return new MessageDetailPb(properties);
     }
 }
 
@@ -58,6 +88,30 @@ export class MessageRequest implements IMessageRequest, Webpb.WebpbMessage {
     }
 }
 
+export interface IMessageDetailRequest {
+    id: string;
+}
+
+export class MessageDetailRequest implements IMessageDetailRequest, Webpb.WebpbMessage {
+    id!: string;
+    META: () => Webpb.WebpbMeta;
+
+    private constructor(p?: IMessageDetailRequest) {
+        Webpb.assign(p, this, []);
+        this.META = () => (p && {
+            class: 'MessageDetailRequest',
+            method: 'GET',
+            path: `/api/messages/${Webpb.query({
+                id: p.id,
+            })}`
+        }) as Webpb.WebpbMeta;
+    }
+
+    static create(properties: IMessageDetailRequest): MessageDetailRequest {
+        return new MessageDetailRequest(properties);
+    }
+}
+
 export interface IMessageResponse {
     data: IMessagePb[];
     paging: ResourceProto.IPagingPb;
@@ -79,5 +133,27 @@ export class MessageResponse implements IMessageResponse {
 
     static create(properties: IMessageResponse): MessageResponse {
         return new MessageResponse(properties);
+    }
+}
+
+export interface IMessageDetailResponse {
+    data: IMessageDetailPb;
+}
+
+export class MessageDetailResponse implements IMessageDetailResponse {
+    data!: IMessageDetailPb;
+    META: () => Webpb.WebpbMeta;
+
+    private constructor(p?: IMessageDetailResponse) {
+        Webpb.assign(p, this, []);
+        this.META = () => (p && {
+            class: 'MessageDetailResponse',
+            method: '',
+            path: ''
+        }) as Webpb.WebpbMeta;
+    }
+
+    static create(properties: IMessageDetailResponse): MessageDetailResponse {
+        return new MessageDetailResponse(properties);
     }
 }

@@ -10,7 +10,15 @@ message MessagePb {
   required string id = 1;
   required string title = 2;
   required string summary = 3;
-  optional bool unread = 4;
+  required string category = 4;
+  optional string link = 5;
+  optional bool unread = 6;
+}
+
+message MessageDetailPb {
+  required string id = 1;
+  required string title = 2;
+  required string content = 3;
 }
 
 message MessageRequest {
@@ -19,7 +27,16 @@ message MessageRequest {
   required ResourceProto.PageablePb pageable = 1;
 }
 
+message MessageDetailRequest {
+  option (method) = 'GET';
+  option (path) = '/api/messages/?id={id}';
+  required string id = 1;
+}
+
 message MessageResponse {
   repeated MessagePb data = 1;
   required ResourceProto.PagingPb paging = 2;
+}
+message MessageDetailResponse {
+  required MessageDetailPb data = 1;
 }

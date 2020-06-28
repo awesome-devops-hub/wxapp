@@ -1,0 +1,14 @@
+.message-body {
+    padding: 2rem 1rem;
+    background-color: #FFF;
+    height: 100%;
+}
+
+.message-body-loading {
+    text-align: center;
+    padding: 1rem;
+
+    .empty {
+        color: #9f9f9f;
+    }
+}

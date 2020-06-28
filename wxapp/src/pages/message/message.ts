@@ -23,7 +23,7 @@ class MessagePage extends WxPage<State> {
 
   onRead(e) {
     const data = this.data.messages.map((m) => {
-      if (m.id === e.target.id) {
+      if (m.id === e.detail.message.id) {
         return { ...m, unread: false };
       }
       return m;

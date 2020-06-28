@@ -79,8 +79,8 @@ describe("search result page", () => {
         try {
             const search_result_wxml = await(await search_result_page.$("van-tabs")).outerWxml();
             expect_or(
-                () => expect(search_result_wxml).toContain("News"),
-                () => expect(search_result_wxml).toContain("Policy")
+                () => expect(search_result_wxml).toContain("新闻"),
+                () => expect(search_result_wxml).toContain("政策")
             );
         }
         catch(e) {

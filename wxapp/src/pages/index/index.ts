@@ -82,6 +82,7 @@ class IndexPage extends WxPage<State> {
     };
     httpService.request(ArticleListRequest.create(payload))
       .subscribe((res) => {
+        wx.stopPullDownRefresh();
         this.setData({
           articles: res.entries,
           pageable: { page: res.pageable.page, size: res.pageable.size },

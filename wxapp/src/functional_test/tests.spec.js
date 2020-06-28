@@ -79,8 +79,8 @@ describe("search result page", () => {
         try {
             const search_result_wxml = await(await search_result_page.$("van-tabs")).outerWxml();
             expect_or(
-                () => expect(search_result_wxml).toContain("News"),
-                () => expect(search_result_wxml).toContain("Policy")
+                () => expect(search_result_wxml).toContain("新闻"),
+                () => expect(search_result_wxml).toContain("政策")
             );
         }
         catch(e) {
@@ -188,4 +188,35 @@ describe("News page", () => {
         const content_container_wxml = await content_container.outerWxml();
         expect(content_container_wxml).toContain("<article-card ");
     }
+});
+
+
+/*
+  Story: #48 消息list页面
+*/
+describe("message page", () => {
+
+    let page;
+
+    beforeAll(async () => {
+        page = await miniprogram.reLaunch("/pages/message/message");
+        await page.waitFor(500);
+    }, 30000);
+
+    it("Message page should contain message cards", async () => {
+        const message_cells = await page.$$("message-card van-cell");
+        expect(message_cells).toBeTruthy();
+    });
+
+    it("The unread tag should disappear when a message card is clicked", async () => {
+        const first_message_tab = (await page.$("message-card van-cell:nth-child(1) view.van-cell"));
+        const title_css_selectoor = "message-card van-cell:nth-child(1) view.van-cell view.card-index--title-box";
+        const first_message_title = await page.$(title_css_selectoor);
+        const first_message_title_wxml = await first_message_title.outerWxml();
+        expect(first_message_title_wxml).toContain(">未读<");
+        await first_message_tab.tap();
+        const first_message_title_after_tap = await page.$(title_css_selectoor);
+        const first_message_title_wxml_after_tap = await first_message_title_after_tap.outerWxml();
+        expect(first_message_title_wxml_after_tap).not.toContain(">未读<");
+    });
 });

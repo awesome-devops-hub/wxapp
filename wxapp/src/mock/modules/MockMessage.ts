@@ -4,6 +4,7 @@ import {
   MessageResponse,
   MessageDetailRequest,
   MessageDetailResponse,
+  IMessagePb,
 } from "../../protocol/MessageProto";
 import { simulatePagination } from "../Utils";
 
@@ -66,23 +67,28 @@ const messagesDetailMock = [
   },
 ];
 
+const generateItem = (page: number, size: number, total: number) => {
+  const _size = page * size > total ? total % size : size;
+  return [...new Array(_size)].map(() => {
+    const msg = messagesMock[Math.floor(Math.random() * 3)];
+    return {
+      ...msg,
+      title: msg.title,
+      // id: Math.floor(Math.random() * 10000).toString(),
+    } as IMessagePb;
+  });
+};
+
 export const mockMessage: MockData[] = [
   {
     request: MessageRequest,
     response: (req: MessageRequest) => {
-      console.log("req", req);
-      console.log(simulatePagination);
-      let messages = [];
-      for (const _n in [1, 2, 3, 4, 5]) {
-        messages = [
-          ...messages,
-          ...messagesMock.map((msg) => ({ ...msg, id: msg.id })),
-        ];
-      }
-      return {
-        data: messages,
-        paging: pagingMock,
-      } as MessageResponse;
+      const { size, page } = req.pageable;
+      return MessageResponse.create({
+        data: generateItem(page, size, pagingMock.totalCount),
+        unreadCount: pagingMock.totalCount,
+        paging: simulatePagination(page, size, pagingMock.totalCount),
+      });
     },
     delay: 1500,
   },
@@ -90,7 +96,6 @@ export const mockMessage: MockData[] = [
     request: MessageDetailRequest,
     response: (req: MessageDetailRequest) => {
       let res = messagesDetailMock.find((ele) => ele.id === req.id);
-
       return {
         data: res,
       } as MessageDetailResponse;

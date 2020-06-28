@@ -35,7 +35,8 @@ message MessageDetailRequest {
 
 message MessageResponse {
   repeated MessagePb data = 1;
-  required ResourceProto.PagingPb paging = 2;
+  required int32 unreadCount = 2;
+  required ResourceProto.PagingPb paging = 3;
 }
 message MessageDetailResponse {
   required MessageDetailPb data = 1;

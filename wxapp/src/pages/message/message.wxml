@@ -12,7 +12,7 @@
 		 wx:for-item="message"
 		 wx:key="index"
 		 bind:read="onRead"
-     message="{{message}}"
+		 message="{{message}}"
 		/>
 		<view wx:if="{{!loading}}" class="pager">
 			<block wx:if="{{!loadingMore}}">

@@ -80,7 +80,7 @@ const generateArticle = (page: number, size: number, total: number, tag: string)
     const article = articleMock[Math.floor(Math.random() * 6)];
     return {
       ...article,
-      title: `第${page}页-${article.title}`,
+      title: article.title,
       id: Math.floor(Math.random() * 10000).toString(),
       category: tagMap[tag] || '其他',
     } as IArticlePb;

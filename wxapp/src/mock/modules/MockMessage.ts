@@ -1,5 +1,5 @@
 import { MockData } from "../Mock";
-import { MessageRequest, MessageResponse } from "../../protocol/MessageProto";
+import { IMessagePb, MessageRequest, MessageResponse } from "../../protocol/MessageProto";
 import { simulatePagination } from "../Utils";
 
 const pagingMock = {
@@ -30,20 +30,27 @@ const messagesMock = [
   },
 ];
 
+const generateItem = (page: number, size: number, total: number) => {
+  const _size = (page * size > total) ? total % size : size;
+  return [...new Array(_size)].map(() => {
+    const msg = messagesMock[Math.floor(Math.random() * 3)];
+    return {
+      ...msg,
+      title: msg.title,
+      id: Math.floor(Math.random() * 10000).toString(),
+    } as IMessagePb;
+  });
+};
+
 export const mockMessage: MockData[] = [{
   request: MessageRequest,
   response: (req: MessageRequest) => {
-    console.log('req', req);
-    console.log(simulatePagination);
-    // const { size, page } = req.pageable;
-    let messages = [];
-    for (const n in [1, 2, 3, 4, 5]) {
-      messages = [...messages, ...messagesMock.map(msg => ({ ...msg, id: n + msg.id }))];
-    }
-    return {
-      data: messages,
-      paging: pagingMock,
-    } as MessageResponse;
+    const { size, page } = req.pageable;
+    return MessageResponse.create({
+      data: generateItem(page, size, pagingMock.totalCount),
+      unreadCount: pagingMock.totalCount,
+      paging: simulatePagination(page, size, pagingMock.totalCount),
+    });
   },
   delay: 1500,
 }

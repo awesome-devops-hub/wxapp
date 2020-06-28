@@ -60,11 +60,13 @@ export class MessageRequest implements IMessageRequest, Webpb.WebpbMessage {
 
 export interface IMessageResponse {
     data: IMessagePb[];
+    unreadCount: number;
     paging: ResourceProto.IPagingPb;
 }
 
 export class MessageResponse implements IMessageResponse {
     data!: IMessagePb[];
+    unreadCount!: number;
     paging!: ResourceProto.IPagingPb;
     META: () => Webpb.WebpbMeta;
 

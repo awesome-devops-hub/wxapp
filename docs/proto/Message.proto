@@ -21,5 +21,6 @@ message MessageRequest {
 
 message MessageResponse {
   repeated MessagePb data = 1;
-  required ResourceProto.PagingPb paging = 2;
+  required int32 unreadCount = 2;
+  required ResourceProto.PagingPb paging = 3;
 }

@@ -16,6 +16,7 @@ Component({
       RxWx.navigateTo("/pages/towxml/towxml", {
         url: "https://wxapp.qun.cool/blog/blog-02.html",
         baseUrl: "https://wxapp.qun.cool/blog/",
+        title:"如果你想转岗做BA"
       }).subscribe();
     },
   },

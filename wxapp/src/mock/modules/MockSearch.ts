@@ -32,7 +32,7 @@ const searchEntriesMock = [
   "Invoice",
   "Buddy Program",
 ];
-const articleModuleMock = ["News", "Policy"];
+const articleModuleMock = ["新闻", "政策"];
 const articleEntriesMock = [
   {
     title: "碎片化时代，找准你的增长飞轮",

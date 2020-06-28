@@ -42,7 +42,7 @@ export class MessageRequest implements IMessageRequest, Webpb.WebpbMessage {
     META: () => Webpb.WebpbMeta;
 
     private constructor(p?: IMessageRequest) {
-        Webpb.assign(p, this, ["pageable"]);
+        Webpb.assign(p, this, []);
         this.META = () => (p && {
             class: 'MessageRequest',
             method: 'GET',

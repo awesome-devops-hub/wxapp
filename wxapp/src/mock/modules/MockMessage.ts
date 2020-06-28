@@ -1,5 +1,6 @@
 import { MockData } from "../Mock";
 import { MessageRequest, MessageResponse } from "../../protocol/MessageProto";
+import { simulatePagination } from "../Utils";
 
 const pagingMock = {
   page: 1,
@@ -31,7 +32,9 @@ const messagesMock = [
 
 export const mockMessage: MockData[] = [{
   request: MessageRequest,
-  response: () => {
+  response: (req: MessageRequest) => {
+    console.log('req', req);
+    console.log(simulatePagination);
     // const { size, page } = req.pageable;
     let messages = [];
     for (const n in [1, 2, 3, 4, 5]) {
@@ -42,6 +45,6 @@ export const mockMessage: MockData[] = [{
       paging: pagingMock,
     } as MessageResponse;
   },
-  delay: 1000,
+  delay: 1500,
 }
 ];

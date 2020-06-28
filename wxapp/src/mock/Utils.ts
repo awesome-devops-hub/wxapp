@@ -17,3 +17,12 @@ export function nextFloat(origin: number, bound: number): number {
 export function nextBoolean(value: number): boolean {
     return Math.random() <= value;
 }
+
+export const simulatePagination = (page: number, size: number, totalCount: number) => {
+    return {
+        page,
+        size,
+        totalCount,
+        totalPage: Math.ceil(totalCount / size),
+    };
+};

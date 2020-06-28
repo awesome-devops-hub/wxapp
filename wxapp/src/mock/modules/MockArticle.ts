@@ -5,6 +5,7 @@ import {
   ArticleModuleRequest,
   ArticleModuleResponse, IArticlePb
 } from "../../protocol/ArticleProto";
+import { simulatePagination } from "../Utils";
 
 const pagingMock = {
   page: 1,
@@ -84,15 +85,6 @@ const generateArticle = (page: number, size: number, total: number, tag: string)
       category: tagMap[tag] || '其他',
     } as IArticlePb;
   });
-};
-
-const simulatePagination = (page: number, size: number, totalCount: number) => {
-  return {
-    page,
-    size,
-    totalCount,
-    totalPage: Math.ceil(totalCount / size),
-  };
 };
 
 export const mockArticle: MockData[] = [

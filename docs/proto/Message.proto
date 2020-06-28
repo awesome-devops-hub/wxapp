@@ -16,7 +16,7 @@ message MessagePb {
 message MessageRequest {
   option (method) = 'GET';
   option (path) = '/api/messages?page={pageable.page}&size={pageable.size}';
-  required ResourceProto.PageablePb pageable = 1 [(omitted) = true];
+  required ResourceProto.PageablePb pageable = 1;
 }
 
 message MessageResponse {

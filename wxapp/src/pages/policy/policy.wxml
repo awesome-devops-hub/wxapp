@@ -82,7 +82,7 @@
 				<text class="icon-alt">假期查询</text>
 			</view>
 		</van-grid-item>
-		<van-grid-item use-slot url="/pages/policy/staff/housing-fund/housing">
+		<van-grid-item use-slot url="/pages/policy/leave/policy/leave">
 			<view class="cust-grid-item">
 				<i class="fa fa-files-o icon" style="color:#4B7A89" aria-hidden="true" />
 				<text class="icon-alt">假期政策</text>

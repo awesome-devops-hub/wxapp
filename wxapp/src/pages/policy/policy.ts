@@ -111,14 +111,16 @@ class PolicyPage extends WxPage<State> {
   tapReimburse() {
     RxWx.navigateTo("/pages/towxml/towxml", {
         url: 'https://wxapp.qun.cool/blog/blog-02.html',
-        baseUrl: 'https://wxapp.qun.cool/blog/'
+        baseUrl: 'https://wxapp.qun.cool/blog/',
+        title:"报销政策"
     }).subscribe();
   }
 
   tapInvoice() {
       RxWx.navigateTo("/pages/towxml/towxml", {
           url: 'https://wxapp.qun.cool/blog/blog-03.html',
-          baseUrl: 'https://wxapp.qun.cool/blog/'
+          baseUrl: 'https://wxapp.qun.cool/blog/',
+          title:"发票信息"
       }).subscribe();
   }
 }

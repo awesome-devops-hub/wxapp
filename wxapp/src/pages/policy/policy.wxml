@@ -49,7 +49,7 @@
 				<text class="icon-alt">体检</text>
 			</view>
 		</van-grid-item>
-		<van-grid-item use-slot url="/pages/webview/webview?url=https://wxapp.qun.cool/blog/blog-04.html">
+		<van-grid-item use-slot url="/pages/webview/webview?url=https://wxapp.qun.cool/blog/blog-04.html&title=商保">
 			<view class="cust-grid-item">
 				<i class="fa fa-university icon" style="color:#6F5278" aria-hidden="true" />
 				<text class="icon-alt">商保</text>
@@ -61,7 +61,7 @@
 				<text class="icon-alt">公积金</text>
 			</view>
 		</van-grid-item>
-		<van-grid-item use-slot url="/pages/webview/webview?url=https://wxapp.qun.cool/blog/blog-04.html">
+		<van-grid-item use-slot url="/pages/webview/webview?url=https://wxapp.qun.cool/blog/blog-04.html&title=EAP">
 			<view class="cust-grid-item">
 				<i class="fa fa-handshake-o icon" style="color:#6F5278" aria-hidden="true" />
 				<text class="icon-alt">EAP</text>
@@ -91,7 +91,7 @@
 	</van-grid>
 	<view class="section-header">其他</view>
 	<van-grid column-num="2" gutter="{{ 1 }}">
-		<van-grid-item use-slot url="/pages/webview/webview?url=https://wxapp.qun.cool/blog/blog-04.html">
+		<van-grid-item use-slot url="/pages/webview/webview?url=https://wxapp.qun.cool/blog/blog-04.html&title=联系Admin">
 			<view class="cust-grid-item">
 				<i class="fa fa-phone icon" style="color:#E88D48" aria-hidden="true" />
 				<text class="icon-alt">联系Admin</text>

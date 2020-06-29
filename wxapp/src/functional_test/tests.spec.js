@@ -215,6 +215,8 @@ describe("message page", () => {
         const first_message_title_wxml = await first_message_title.outerWxml();
         expect(first_message_title_wxml).toContain(">未读<");
         await first_message_tab.tap();
+        await page.waitFor(1000);
+        await miniprogram.navigateBack();
         const first_message_title_after_tap = await page.$(title_css_selectoor);
         const first_message_title_wxml_after_tap = await first_message_title_after_tap.outerWxml();
         expect(first_message_title_wxml_after_tap).not.toContain(">未读<");

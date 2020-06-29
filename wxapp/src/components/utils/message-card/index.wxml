@@ -1,6 +1,6 @@
 <van-cell center clickable label="{{message.summary}}" data-id="{{message.id}}" bindtap="onTap">
   <view slot="title" class="title-box">
-    <view class="title">{{message.id}}{{message.title}}</view>
+    <view class="title">{{message.title}}</view>
     <van-tag wx:if="{{message.unread}}" type="danger">未读</van-tag>
   </view>
 </van-cell>

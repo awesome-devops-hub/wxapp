@@ -45,8 +45,8 @@ class MessagePage extends WxPage<State> {
       }
       return m;
     });
-    const unread = unreadCount - 1;
-    this.updateMessage(data, paging, unread);
+    const readMessages = messages.filter((m)=> m.id === e.detail.message.id && m.unread).length;
+    this.updateMessage(data, paging, unreadCount - readMessages);
   }
 
   onRefresh() {
@@ -80,7 +80,7 @@ class MessagePage extends WxPage<State> {
       .request(MessageRequest.create({ pageable }))
       .subscribe((res: MessageResponse) => {
         const messages = [...this.data.messages, ...res.data];
-        this.updateMessage(messages, res.paging);
+        this.updateMessage(messages, res.paging, this.data.unreadCount);
       });
   }
 
@@ -97,7 +97,7 @@ class MessagePage extends WxPage<State> {
       loading: false,
       loadingMore: false,
     });
-    if (unreadCount) {
+    if (unreadCount> -1) {
       this.getTabBar().setData({ unreadCount });
       wx.setStorageSync("unreadCount", unreadCount);
     }

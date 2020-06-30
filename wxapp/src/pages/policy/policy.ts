@@ -29,7 +29,6 @@ class PolicyPage extends WxPage<State> {
     this.getAnnualLeaveInfoByEmail({
       email: "user_email",
     }).subscribe((res) => {
-      console.log("leave req", res);
       if (res.data) {
         this.setData({
           leaveInfo: res.data,
@@ -44,6 +43,18 @@ class PolicyPage extends WxPage<State> {
     this.setDateString();
   }
 
+  onShow() {
+    this.initMessage();
+    typeof this.getTabBar === "function" && this.getTabBar().setData({ active: 1 });
+  }
+
+  initMessage() {
+    const msgCount = wx.getStorageSync('unreadCount');
+    if (msgCount) {
+      this.getTabBar().setData({ unreadCount: msgCount });
+    }
+  }
+
   setDateString() {
     let d = Date.now();
     const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
@@ -51,11 +62,6 @@ class PolicyPage extends WxPage<State> {
     const da = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(d);
     this.setData({ dateYear: ye });
     this.setData({ dateInfo: ye + "年" + mo + "月" + da + "日" });
-  }
-
-  onShow() {
-    typeof this.getTabBar === "function" &&
-      this.getTabBar().setData({ active: 1 });
   }
 
   onChange(event) {

@@ -23,8 +23,8 @@ class MessagePage extends WxPage<State> {
   }
 
   onShow() {
-    typeof this.getTabBar === "function" &&
-      this.getTabBar().setData({ active: 2 });
+    this.initMessage();
+    typeof this.getTabBar === "function" && this.getTabBar().setData({ active: 2 });
   }
 
   onShareAppMessage(res: any) {
@@ -59,6 +59,13 @@ class MessagePage extends WxPage<State> {
       return;
     }
     this.setData({ loadingMore: true }, () => this.loadMore());
+  }
+
+  initMessage() {
+    const msgCount = wx.getStorageSync('unreadCount');
+    if (msgCount) {
+      this.getTabBar().setData({ unreadCount: msgCount });
+    }
   }
 
   init() {
@@ -99,7 +106,6 @@ class MessagePage extends WxPage<State> {
     });
     if (unreadCount> -1) {
       this.getTabBar().setData({ unreadCount });
-      wx.setStorageSync("unreadCount", unreadCount);
     }
   }
 }

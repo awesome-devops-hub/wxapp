@@ -1,7 +1,7 @@
 Component({
   data: {
     active: null,
-    messageCount: null,
+    unreadCount: null,
     list: [{
       path: '/pages/index/index',
       icon: 'newspaper-o',
@@ -23,4 +23,9 @@ Component({
       });
     },
   },
+  observers: {
+    'unreadCount': function(unreadCount) {
+      wx.setStorageSync('unreadCount', unreadCount);
+    }
+  }
 });

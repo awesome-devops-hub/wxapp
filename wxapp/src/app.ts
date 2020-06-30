@@ -4,6 +4,6 @@ import { Environment } from '../env/env';
 export const environment: Environment = process.env;
 
 App({
-    onLaunch(_options: WechatMiniprogram.App.LaunchShowOption) {
-    }
+  onLaunch(_options: WechatMiniprogram.App.LaunchShowOption) {
+  },
 });

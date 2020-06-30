@@ -8,6 +8,8 @@ import {
   ArticleModuleResponse,
   IArticleListRequest
 } from "../../protocol/ArticleProto";
+import { IPageablePb } from "../../protocol/ResourceProto";
+import { MessageRequest, MessageResponse } from "../../protocol/MessageProto";
 
 interface State {
   extraData: any
@@ -29,9 +31,11 @@ class IndexPage extends WxPage<State> {
 
   onLoad(_query: Record<string, string | undefined>) {
     this.init();
+    this.initMessages();
   }
 
   onShow() {
+    this.initMessage();
     typeof this.getTabBar === 'function' && this.getTabBar().setData({ active: 0 });
   }
 
@@ -73,6 +77,22 @@ class IndexPage extends WxPage<State> {
         });
         this.reloadArticle();
       });
+  }
+
+  initMessages() {
+    const pageable: IPageablePb = { page: 1, size: 10 };
+    httpService.request(MessageRequest.create({ pageable }))
+      .subscribe((res: MessageResponse) => {
+        wx.setStorageSync('unreadCount', res.unreadCount);
+        this.getTabBar().setData({ unreadCount: res.unreadCount });
+      });
+  }
+
+  initMessage() {
+    const msgCount = wx.getStorageSync('unreadCount');
+    if (msgCount) {
+      this.getTabBar().setData({ unreadCount: msgCount });
+    }
   }
 
   reloadArticle() {

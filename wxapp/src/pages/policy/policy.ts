@@ -50,7 +50,7 @@ class PolicyPage extends WxPage<State> {
 
   initMessage() {
     const msgCount = wx.getStorageSync('unreadCount');
-    if (msgCount) {
+    if (msgCount > -1) {
       this.getTabBar().setData({ unreadCount: msgCount });
     }
   }

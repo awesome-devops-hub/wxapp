@@ -3,9 +3,11 @@ import {
   ArticleListRequest,
   ArticleListResponse,
   ArticleModuleRequest,
-  ArticleModuleResponse, IArticlePb
+  ArticleModuleResponse,
+  IArticlePb
 } from "../../protocol/ArticleProto";
 import { simulatePagination } from "../Utils";
+import { ArticleDetailRequest, ArticleDetailResponse } from "../../protocol/ArticleEntryProto";
 
 const pagingMock = {
   page: 1,
@@ -32,6 +34,7 @@ const articleMock = [
   {
     title: "碎片化时代，找准你的增长飞轮",
     id: "1",
+    coverImage: "http://img3.imgtn.bdimg.com/it/u=2774391408,3578926483&fm=214&gp=0.jpg",
     category: "博客大赛",
     date: '一天前'
   },
@@ -44,6 +47,7 @@ const articleMock = [
   {
     title: "你的能力和态度及格了吗",
     id: "3",
+    coverImage: "http://img3.imgtn.bdimg.com/it/u=2774391408,3578926483&fm=214&gp=0.jpg",
     category: "博客大赛",
     date: '三天前'
   },
@@ -56,6 +60,7 @@ const articleMock = [
   {
     title: "微信小程序技术原理与开发框架评析",
     id: "5",
+    coverImage: "http://img3.imgtn.bdimg.com/it/u=2774391408,3578926483&fm=214&gp=0.jpg",
     category: "博客大赛",
     date: '三天前'
   },
@@ -66,6 +71,11 @@ const articleMock = [
     date: '一周前'
   },
 ];
+
+const mockArticleDetail = {
+  title: '如果你想转岗做BA',
+  link: `https://wxapp.qun.cool/blog/blog-02.html`
+};
 
 const tagMap = {
   newsletter: '新闻',
@@ -114,5 +124,11 @@ export const mockArticle: MockData[] = [
 
     },
     delay: 1000,
+  }, {
+    request: ArticleDetailRequest,
+    response: (req: ArticleDetailRequest) =>
+      ArticleDetailResponse.create({
+        data: { ...mockArticleDetail, id: req.id }
+      }),
   }
 ];

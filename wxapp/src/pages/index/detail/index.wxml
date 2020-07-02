@@ -1,0 +1,13 @@
+<view wx:if="{{article != null}}" class="article-body">
+  {{article.link}}
+  <webview url="{{article.link}}"/>
+</view>
+<view wx:else class="article-body-loading">
+  <block wx:if="{{loading}}">
+    <van-loading color="#4CA663" />
+  </block>
+  <block wx:else>
+    <view class="empty">没找到相应内容</view>
+  </block>
+</view>
+

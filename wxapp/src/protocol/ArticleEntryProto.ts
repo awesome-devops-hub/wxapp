@@ -34,3 +34,75 @@ export class articleEntryPb implements IarticleEntryPb {
         return new articleEntryPb(properties);
     }
 }
+
+export interface IArticleDetailPb {
+    id: string;
+    title: string;
+    link: string;
+}
+
+export class ArticleDetailPb implements IArticleDetailPb {
+    id!: string;
+    title!: string;
+    link!: string;
+    META: () => Webpb.WebpbMeta;
+
+    private constructor(p?: IArticleDetailPb) {
+        Webpb.assign(p, this, []);
+        this.META = () => (p && {
+            class: 'ArticleDetailPb',
+            method: '',
+            path: ''
+        }) as Webpb.WebpbMeta;
+    }
+
+    static create(properties: IArticleDetailPb): ArticleDetailPb {
+        return new ArticleDetailPb(properties);
+    }
+}
+
+export interface IArticleDetailRequest {
+    id: string;
+}
+
+export class ArticleDetailRequest implements IArticleDetailRequest, Webpb.WebpbMessage {
+    id!: string;
+    META: () => Webpb.WebpbMeta;
+
+    private constructor(p?: IArticleDetailRequest) {
+        Webpb.assign(p, this, []);
+        this.META = () => (p && {
+            class: 'ArticleDetailRequest',
+            method: 'GET',
+            path: `/api/article${Webpb.query({
+                id: p.id,
+            })}`
+        }) as Webpb.WebpbMeta;
+    }
+
+    static create(properties: IArticleDetailRequest): ArticleDetailRequest {
+        return new ArticleDetailRequest(properties);
+    }
+}
+
+export interface IArticleDetailResponse {
+    data: IArticleDetailPb;
+}
+
+export class ArticleDetailResponse implements IArticleDetailResponse {
+    data!: IArticleDetailPb;
+    META: () => Webpb.WebpbMeta;
+
+    private constructor(p?: IArticleDetailResponse) {
+        Webpb.assign(p, this, []);
+        this.META = () => (p && {
+            class: 'ArticleDetailResponse',
+            method: '',
+            path: ''
+        }) as Webpb.WebpbMeta;
+    }
+
+    static create(properties: IArticleDetailResponse): ArticleDetailResponse {
+        return new ArticleDetailResponse(properties);
+    }
+}

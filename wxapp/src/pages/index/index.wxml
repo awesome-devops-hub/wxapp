@@ -5,50 +5,53 @@
     placeholder="请输入搜索关键词"
     bindtap="onSearch"
   ></van-search>
-  <view wx:if="{{ !loading }}">
-    <van-tabs
-      class="article-tabs"
-      bind:change="onTabChange"
-      active="{{activeTab}}"
-    >
-      <van-tab
-        wx:for="{{ modules }}"
-        wx:for-item="tab"
-        wx:key="id"
-        title="{{tab.title}}"
-        name="{{tab.id}}"
-        class="article-tab"
-      >
-        <view wx:if="{{ !loadingArticle }}" class="article-box">
-          <article-card
-            wx:for="{{ articles }}"
-            wx:for-item="article"
-            wx:key="id"
-            title="{{article.title}}"
-            category="{{article.category}}"
-            date="{{article.date}}"
-            class="article-tab"
-          ></article-card>
-          <view class="pager">
-            <van-button
-              type="primary"
-              wx:if="{{totalCount > articles.length}}"
-              loading="{{loadingMoreArticle}}"
-              loading-text="加载中..."
-              bind:click="onLoadMore"
-            >
-              查看更多
-            </van-button>
-            <view wx:else class="p-btn">无更多内容</view>
-          </view>
-        </view>
-        <view wx:else class="skeleton-box">
-          <van-skeleton class="skeleton" title row="10"/>
-        </view>
-      </van-tab>
-    </van-tabs>
-  </view>
-  <view wx:else class="skeleton-box">
+
+  <view wx:if="{{ loading }}" class="skeleton-box">
     <van-skeleton class="skeleton" title row="10"/>
   </view>
+  <van-tabs
+    wx:else
+    animated
+    class="article-tabs"
+    bind:change="onTabChange"
+    active="{{activeTab}}"
+  >
+    <van-tab
+      wx:for="{{ modules }}"
+      wx:for-item="tab"
+      wx:key="id"
+      title="{{tab.title}}"
+      name="{{tab.id}}"
+      class="article-tab"
+    >
+      <scroll-view scroll-y wx:if="{{ !loadingArticle }}" class="article-box">
+        <article-card
+          wx:for="{{ articles }}"
+          wx:for-item="article"
+          wx:key="id"
+          aid="{{article.id}}"
+          title="{{article.title}}"
+          coverImage="{{article.coverImage}}"
+          category="{{article.category}}"
+          date="{{article.date}}"
+          class="article-tab"
+        ></article-card>
+        <view class="pager">
+          <van-button
+            type="primary"
+            wx:if="{{totalCount > articles.length}}"
+            loading="{{loadingMoreArticle}}"
+            loading-text="加载中..."
+            bind:click="onLoadMore"
+          >
+            查看更多
+          </van-button>
+          <view wx:else class="p-btn">无更多内容</view>
+        </view>
+      </scroll-view>
+      <view wx:else class="skeleton-box">
+        <van-skeleton class="skeleton" title row="10"/>
+      </view>
+    </van-tab>
+  </van-tabs>
 </view>

@@ -4,12 +4,27 @@ package ArticleEntryProto;
 
 option java_package = "cool.qun.estate.backend.protocol.articleEntry";
 
-
 message articleEntryPb{
-    required string id = 1;
-    required string title = 2;
-    required string category = 3;
-    optional string coverImage = 4;
-    optional string publishAt = 5;
-    optional string author = 6;
+  required string id = 1;
+  required string title = 2;
+  required string category = 3;
+  optional string coverImage = 4;
+  optional string publishAt = 5;
+  optional string author = 6;
+}
+
+message ArticleDetailPb {
+  required string id = 1;
+  required string title = 2;
+  required string link = 3;
+}
+
+message ArticleDetailRequest {
+  option (method) = 'GET';
+  option (path) = '/api/article?id={id}';
+  required string id = 1;
+}
+
+message ArticleDetailResponse {
+  required ArticleDetailPb data = 1;
 }

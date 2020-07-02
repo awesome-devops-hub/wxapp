@@ -14,6 +14,7 @@ export interface IArticleListRequest {
 export interface IArticlePb {
   id: string;
   title: string;
+  coverImage: string;
   category?: string;
   date?: string;
 }

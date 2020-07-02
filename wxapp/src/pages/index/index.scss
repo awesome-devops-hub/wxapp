@@ -1,70 +1,89 @@
-.page {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 50px;
+//:host {
+//    height: 100vh;
+//    overflow-y: hidden;
+//    padding-bottom: 50px;
+//    box-sizing: border-box;
+//}
 
-    .skeleton-box {
-        flex-grow: 1;
-        background-color: #fff;
-        padding: 20px 0;
-        .skeleton {
-            margin-bottom: 20px;
-        }
-    }
+.page {
+  //height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 50px;
+
+  //.article-tabs {
+  //    flex: 1;
+  //    max-height: calc(100% - 54px);
+  //    overflow-y: auto;
+  //}
+  //
+  //.article-tab {
+  //    height: 100%;
+  //}
+}
+
+.skeleton-box {
+  flex-grow: 1;
+  background-color: #fff;
+  padding: 20px 0;
+
+  .skeleton {
+    margin-bottom: 20px;
+  }
 }
 
 .loading {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    overflow-y: hidden;
-    padding: 20px 0;
-    background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-y: hidden;
+  padding: 20px 0;
+  background-color: #fff;
 }
 
 .content {
-    .article-box {
-        padding-top: 10px;
-        max-height: 100%;
-    }
+  .article-box {
+    padding-top: 10px;
+    max-height: 100%;
+  }
 }
 
 .pager {
-    display: flex;
-    justify-content: center;
-    padding: .5rem 1rem;
+  display: flex;
+  justify-content: center;
+  padding: .5rem 1rem;
 
-    .p-btn {
-        color: #9f9f9f;
-        font-size: 14px;
-        padding: .5rem;
-        width: 100%;
-        text-align: center;
-    }
+  .p-btn {
+    color: #9f9f9f;
+    font-size: 14px;
+    padding: .5rem;
+    width: 100%;
+    text-align: center;
+  }
 
-    .bubble {
-        position: relative;
-        overflow: hidden;
-    }
+  .bubble {
+    position: relative;
+    overflow: hidden;
+  }
 
-    .bubble:after {
-        content: "";
-        background: #4CA663;
-        position: absolute;
-        width: 750rpx;
-        height: 750rpx;
-        left: calc(50% - 375rpx);
-        top: calc(50% - 375rpx);
-        opacity: 0;
-        margin: auto;
-        border-radius: 50%;
-        transform: scale(1);
-        transition: all 0.4s ease-in-out;
-    }
+  .bubble:after {
+    content: "";
+    background: #4CA663;
+    position: absolute;
+    width: 750 rpx;
+    height: 750 rpx;
+    left: calc(50% - 375rpx);
+    top: calc(50% - 375rpx);
+    opacity: 0;
+    margin: auto;
+    border-radius: 50%;
+    transform: scale(1);
+    transition: all 0.4s ease-in-out;
+  }
 
-    .bubble:active:after {
-        transform: scale(0);
-        opacity: 1;
-        transition: 0s;
-    }
+  .bubble:active:after {
+    transform: scale(0);
+    opacity: 1;
+    transition: 0s;
+  }
 }

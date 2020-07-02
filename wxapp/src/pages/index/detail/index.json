@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "van-loading": "/components/vant/loading/index",
+    "webview": "/pages/webview/webview"
+  }
+}

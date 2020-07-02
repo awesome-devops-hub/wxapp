@@ -6,7 +6,7 @@
       <text class="date">{{date}}</text>
     </view>
   </div>
-  <div class="image-box">
-    <image class="image" src="/assets/images/empty.png"></image>
+  <div class="image-box" wx:if="{{coverImage}}">
+    <image class="image" src="{{coverImage}}"></image>
   </div>
 </view>

@@ -1,7 +1,6 @@
 {
     "pages": [
         "pages/index/index",
-        "pages/index/detail/index",
         "pages/search/search",
         "pages/search-result/search-result",
         "pages/policy/travel/guide/guide",

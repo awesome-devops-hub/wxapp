@@ -7,6 +7,6 @@
     </view>
   </div>
   <div class="image-box" wx:if="{{coverImage}}">
-    <image class="image" src="{{coverImage}}"></image>
+    <image class="image" mode="aspectFill" src="{{coverImage}}"></image>
   </div>
 </view>

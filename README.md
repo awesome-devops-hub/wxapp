@@ -17,17 +17,6 @@ This project aims to build a mini-program interface. All backend logics are mock
 - npm
 - node
 
-### Starting the project
-
-#### Build the project
-
-In your terminal, run: 
-```bash
-cd wxapp/
-npm i
-npm start
-```
-
 ### Code structure
 
 ```
@@ -81,6 +70,17 @@ src
 [Use protocal buffers of Google to define the contract documents for frontend and backend](https://developers.google.cn/protocol-buffers/)
 
 Please refer to ``wxapp/docs/proto``
+
+### Starting the project
+
+#### Build the project
+
+In your terminal, run: 
+```bash
+cd wxapp/
+npm i
+npm start
+```
 
 #### Run the project
 

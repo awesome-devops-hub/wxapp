@@ -17,6 +17,60 @@ wxapp是一个提升小程序开发能力的内部项目。此项目的原本愿
 - npm
 - node
 
+### 代码结构
+
+```
+wxapp
+├── babel.config.js
+├── dist
+├── env
+├── jest.config.js
+├── node_modules
+├── package-lock.json
+├── package.json
+├── project.config.json
+├── src
+├── tsconfig.json
+├── webpack
+└── webpack.config.ts
+```
+
+- env 环境配置
+- src 项目源代码
+
+```
+src
+├── app.json
+├── app.scss
+├── app.ts
+├── assets
+├── components
+├── core
+├── custom-tab-bar
+├── functional_test
+├── mock
+├── pages
+├── protocol
+└── styles
+```
+
+- assets 静态资源
+- components 可复用的自定义组件
+- core 工具组件
+- custom-tab-bar 小程序底部导航
+- functional_test 功能测试模块
+- mock 模拟数据
+- pages 小程序页面
+- protocol 由google的protocol buffers生成的类，主要用于远端通信
+- styles 样式文件
+- app.* [微信小程序相关配置](https://developers.weixin.qq.com/miniprogram/dev/framework/structure.html)
+
+### 创建mock类
+
+[使用 goodle 的 protocol buffers 定义前后端的契约文档](https://developers.google.cn/protocol-buffers/)
+
+请参见 ``wxapp/docs/proto``
+
 ### 启动项目
 
 #### 构建项目
